@@ -11,26 +11,26 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 	"nez-server/internal/dao"
 	"nez-server/internal/logic/consumer"
-	"nez-server/internal/logic/contract/buy"
+	"nez-server/internal/logic/contract/staking"
 	"nez-server/internal/logic/global"
 	"nez-server/internal/model/entity"
 	"nez-server/internal/service"
 )
 
-type sNFTBuy struct {
+type sNFTStaking struct {
 	ContractAddress common.Address
 }
 
 func init() {
-	service.RegisterNFTBuy(NewNFTBuy())
+	service.RegisterNFTStaking(NewNFTStaking())
 }
 
-func NewNFTBuy() service.INFTBuy {
-	return &sNFTBuy{ContractAddress: global.NFTStakingContract}
+func NewNFTStaking() service.INFTStaking {
+	return &sNFTStaking{ContractAddress: global.NFTStakingContract}
 }
 
 // ConsumeEvents 消费链上事件
-func (s *sNFTBuy) ConsumeEvents(ctx context.Context) error {
+func (s *sNFTStaking) ConsumeEvents(ctx context.Context) error {
 	if logs, err := consumer.ConsumeAllEvent(ctx, s.ContractAddress.String()); err != nil {
 		return err
 	} else {
@@ -52,19 +52,19 @@ func (s *sNFTBuy) ConsumeEvents(ctx context.Context) error {
 	return nil
 }
 
-func (s *sNFTBuy) handleEventLog(ctx context.Context, contractAddress common.Address, log *scanner.Elog) error {
+func (s *sNFTStaking) handleEventLog(ctx context.Context, contractAddress common.Address, log *scanner.Elog) error {
 	client, err := ethclient.Dial(global.RpcUri)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
 	}
 	defer client.Close()
-	contract, err := buy.NewBuy(contractAddress, client)
+	contract, err := staking.NewStaking(contractAddress, client)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
 	}
-	event, err := contract.ParseBuyNft(log.Log)
+	event, err := contract.ParseStaked(log.Log)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
@@ -72,14 +72,14 @@ func (s *sNFTBuy) handleEventLog(ctx context.Context, contractAddress common.Add
 	if event == nil {
 		return errors.New("parse event failed")
 	}
-	g.Log().Infof(ctx, "Handle nft buy", event.Member.Hex(), event.Token.Hex())
-	return s.newBuy(ctx, event, log)
+	g.Log().Infof(ctx, "Handle nft staking", event.User.Hex(), event.Raw.Address.Hex())
+	return s.newStaking(ctx, s.ContractAddress, event, log)
 }
 
-func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, log *scanner.Elog) error {
+func (s *sNFTStaking) newStaking(ctx context.Context, contractAddress common.Address, event *staking.StakingStaked, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	eventId := log.Index
-	rec, err := dao.NftBuy.Ctx(ctx).One("tx_hash = ? AND event_id = ?", hash, eventId)
+	rec, err := dao.NftStaking.Ctx(ctx).One("tx_hash = ? AND event_id = ?", hash, eventId)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
@@ -90,29 +90,27 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, log *scanner
 			g.Log().Error(ctx, err)
 			return err
 		}
-		newBuy := &entity.NftBuy{
-			Account:         event.Member.Hex(),
-			ContractAddress: event.Token.Hex(),
+		newBuy := &entity.NftStaking{
+			Account:         event.User.Hex(),
+			ContractAddress: contractAddress.String(),
 			//TokenId:         uint(event.TokenId.Uint64()),
 			TxHash:    hash,
 			TxTime:    gtime.NewFromTimeStamp(int64(time)),
 			TxEventId: eventId,
 		}
-		insertId, err := dao.NftBuy.Ctx(ctx).InsertAndGetId(newBuy)
+		insertId, err := dao.NftStaking.Ctx(ctx).InsertAndGetId(newBuy)
 		if err != nil {
 			g.Log().Error(ctx, err)
 			return err
 		}
 		newBuy.Id = uint(insertId)
-		//第一版先不自动结算
-		//return service.NFTBuyReward().HandleNewBuy(ctx, newBuy)
 	}
 	return nil
 }
 
-func (s *sNFTBuy) GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error) {
+func (s *sNFTStaking) GetStakingInfo(ctx context.Context, account string) (map[string]uint64, error) {
 	info := make(map[string]uint64)
-	res, err := dao.NftBuy.Ctx(ctx).All("account = ?", account)
+	res, err := dao.NftStaking.Ctx(ctx).All("account = ?", account)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return nil, err
@@ -120,14 +118,14 @@ func (s *sNFTBuy) GetBuyInfo(ctx context.Context, account string) (map[string]ui
 	if res.IsEmpty() {
 		return info, nil
 	}
-	buyInfoList := make([]entity.NftBuy, 0)
-	err = res.Structs(&buyInfoList)
+	stakingInfoList := make([]entity.NftStaking, 0)
+	err = res.Structs(&stakingInfoList)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return nil, err
 	}
-	for _, nftBuy := range buyInfoList {
-		info[nftBuy.ContractAddress]++
+	for _, nftStaking := range stakingInfoList {
+		info[nftStaking.ContractAddress]++
 	}
 	return info, nil
 }

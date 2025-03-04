@@ -5,15 +5,7 @@ gfcli:
   gen:
     dao:
         link: "mariadb:root:X7kP!m9qL2vR@tcp(3.87.153.255:33065)/nazhua"
-        table: "account_token_balance,
-        account_token_balance_log,
-        nft_box,nft_hold,
-        nft_staking,
-        nft_staking_claim,
-        nft_transfer,
-        reward_pool_claim,
-        reward_pool_join,
-        reward_pool_settlement"
+        table: "nft_buy"
 
   docker:
     build: "-a amd64 -s linux -p temp -ew"
