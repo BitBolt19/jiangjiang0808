@@ -13,7 +13,7 @@ func Scanner() {
 	ctx := gctx.GetInitCtx()
 	_, err := gcron.AddSingleton(ctx, "*/10 * * * * *", func(ctx context.Context) {
 		var wg sync.WaitGroup
-		wg.Add(3)
+		wg.Add(4)
 		// nft 质押
 		go func() {
 			defer wg.Done()

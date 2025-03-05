@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/gogf/gf/contrib/drivers/mysql/v2"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
 	"nez-server/internal/logic/process/scanner"
