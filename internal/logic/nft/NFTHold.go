@@ -5,8 +5,6 @@ import (
 	"errors"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
-	v1 "nez-server/api/Nft/v1"
-	"nez-server/internal/apiEntity"
 	"nez-server/internal/dao"
 	"nez-server/internal/model/entity"
 	"nez-server/internal/service"
@@ -82,20 +80,21 @@ func (s *sNFTHold) NewTransfer(ctx context.Context, contract string, to string, 
 	//return service.NFTHolderReward().HandleNewNFTHold(ctx, &NFTHold)
 }
 
-func (s *sNFTHold) GetAccountHold(ctx context.Context, req *v1.GetNftHoldReq) (*v1.GetNftHoldRes, error) {
-	account := req.Account
-	result, err := dao.NftHold.Ctx(ctx).Where("account = ?", account).Fields("account", "contract_address", "token_id").OrderDesc("created_at").All()
-	if err != nil {
-		return nil, err
-	}
-	var list []*apiEntity.NFTHoldInfo
-	if err = result.Structs(&list); err != nil {
-		return nil, err
-	}
-	return &v1.GetNftHoldRes{
-		List: list,
-	}, nil
-}
+//
+//func (s *sNFTHold) GetAccountHold(ctx context.Context, req *v1.GetNftHoldReq) (*v1.GetNftHoldRes, error) {
+//	account := req.Account
+//	result, err := dao.NftHold.Ctx(ctx).Where("account = ?", account).Fields("account", "contract_address", "token_id").OrderDesc("created_at").All()
+//	if err != nil {
+//		return nil, err
+//	}
+//	var list []*apiEntity.NFTHoldInfo
+//	if err = result.Structs(&list); err != nil {
+//		return nil, err
+//	}
+//	return &v1.GetNftHoldRes{
+//		List: list,
+//	}, nil
+//}
 
 func (s *sNFTHold) GetAccountNFTHoldNum(ctx context.Context, account string) (holdNum int, err error) {
 	return dao.NftHold.Ctx(ctx).Where("account = ?", account).Count()

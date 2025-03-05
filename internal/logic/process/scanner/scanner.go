@@ -14,6 +14,7 @@ func Scanner() {
 	_, err := gcron.AddSingleton(ctx, "*/10 * * * * *", func(ctx context.Context) {
 		var wg sync.WaitGroup
 		wg.Add(3)
+		// nft 质押
 		go func() {
 			defer wg.Done()
 			err := service.NFTStaking().ConsumeEvents(ctx)
@@ -21,6 +22,7 @@ func Scanner() {
 				g.Log().Errorf(ctx, "failed to consume account bind events, error:%+v", err)
 			}
 		}()
+		// nft Transfer
 		go func() {
 			defer wg.Done()
 			err := service.NFT().ConsumeEvents(ctx)
@@ -28,11 +30,20 @@ func Scanner() {
 				g.Log().Errorf(ctx, "failed to consume NFT events, error:%+v", err)
 			}
 		}()
+		// nft 购买
 		go func() {
 			defer wg.Done()
 			err := service.NFTBuy().ConsumeEvents(ctx)
 			if err != nil {
 				g.Log().Errorf(ctx, "failed to consume NFT Buy events, error:%+v", err)
+			}
+		}()
+		// nft 开盲盒
+		go func() {
+			defer wg.Done()
+			err := service.NFTbox().ConsumeEvents(ctx)
+			if err != nil {
+				g.Log().Errorf(ctx, "failed to consume NFT Box events, error:%+v", err)
 			}
 		}()
 		wg.Wait()

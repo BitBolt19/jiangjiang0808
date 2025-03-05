@@ -3,7 +3,6 @@ package global
 import (
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
 )
@@ -111,16 +110,16 @@ func init() {
 		}
 		g.Log().Info(ctx, NFTBuyRewards)
 	}
-	if NFTTokenWithdrawSigPrivateKeyStr, err := g.Cfg().Get(ctx, "contract.NFTTokenWithdrawSigPrivateKey"); err != nil {
-		panic(err)
-	} else {
-		if err != nil {
-			g.Log().Errorf(ctx, "load NFTTokenWithdrawSigPrivateKey config err %s", err)
-			panic(err)
-		}
-		NFTTokenWithdrawSigPrivateKey, err = crypto.HexToECDSA(NFTTokenWithdrawSigPrivateKeyStr.String())
-		if err != nil {
-			g.Log().Errorf(ctx, "set autoRewardPrivateKeyStr %s", err)
-		}
-	}
+	//if NFTTokenWithdrawSigPrivateKeyStr, err := g.Cfg().Get(ctx, "contract.NFTTokenWithdrawSigPrivateKey"); err != nil {
+	//	panic(err)
+	//} else {
+	//	if err != nil {
+	//		g.Log().Errorf(ctx, "load NFTTokenWithdrawSigPrivateKey config err %s", err)
+	//		panic(err)
+	//	}
+	//	NFTTokenWithdrawSigPrivateKey, err = crypto.HexToECDSA(NFTTokenWithdrawSigPrivateKeyStr.String())
+	//	if err != nil {
+	//		g.Log().Errorf(ctx, "set autoRewardPrivateKeyStr %s", err)
+	//	}
+	//}
 }

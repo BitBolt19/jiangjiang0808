@@ -5,7 +5,6 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gcron"
 	"github.com/gogf/gf/v2/os/gctx"
-	"nft-staking/internal/service"
 	"sync"
 )
 
@@ -17,10 +16,10 @@ func RunReward() {
 		//发放NFT持有奖励（GP）
 		go func() {
 			defer wg.Done()
-			err := service.NFTHolderReward().RunReward(ctx)
-			if err != nil {
-				g.Log().Error(ctx, "failed to run NFT holder reward", err)
-			}
+			//err := service.NFTHolderReward().RunReward(ctx)
+			//if err != nil {
+			//	g.Log().Error(ctx, "failed to run NFT holder reward", err)
+			//}
 		}()
 		wg.Wait()
 	})

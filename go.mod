@@ -7,8 +7,8 @@ toolchain go1.23.1
 require (
 	github.com/ethereum/go-ethereum v1.15.4
 	github.com/ethscanner/ethereum-log-scanner v1.0.5
+	github.com/gogf/gf/contrib/drivers/mysql/v2 v2.6.4
 	github.com/gogf/gf/v2 v2.7.1
-	github.com/shopspring/decimal v1.4.0
 )
 
 require (
@@ -37,6 +37,7 @@ require (
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.11.0 // indirect
+	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
