@@ -2,7 +2,6 @@ package nft
 
 import (
 	"context"
-	"errors"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethscanner/ethereum-log-scanner/core/scanner"
@@ -26,7 +25,7 @@ func init() {
 }
 
 func NewNFTbox() service.INFTbox {
-	return &sNFTbox{ContractAddress: global.NFTStakingContract}
+	return &sNFTbox{ContractAddress: global.Box}
 }
 
 // ConsumeEvents 消费链上事件
@@ -65,15 +64,19 @@ func (s *sNFTbox) handleEventLog(ctx context.Context, contractAddress common.Add
 		return err
 	}
 	event, err := contract.ParseBlindBoxNft(log.Log)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return err
+	//if err != nil {
+	//	g.Log().Error(ctx, err)
+	//	return err
+	//}
+	//if event == nil {
+	//	return errors.New("parse event failed")
+	//}
+	//g.Log().Infof(ctx, "Handle nft Box Open", event.Member.Hex(), event.Token.Hex())
+	//return s.newBox(ctx, event, log)
+	if event != nil {
+		return s.newBox(ctx, event, log)
 	}
-	if event == nil {
-		return errors.New("parse event failed")
-	}
-	g.Log().Infof(ctx, "Handle nft open", event.Member.Hex(), event.Token.Hex())
-	return s.newBox(ctx, event, log)
+	return nil
 }
 
 func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBlindBoxNft, log *scanner.Elog) error {
@@ -93,10 +96,9 @@ func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBlindBoxNft, log *sc
 		newBox := &entity.NftBox{
 			Account:         event.Member.Hex(),
 			ContractAddress: event.Token.Hex(),
-			//TokenId:         uint(event.TokenId.Uint64()),
-			TxHash:    hash,
-			TxTime:    gtime.NewFromTimeStamp(int64(time)),
-			TxEventId: eventId,
+			TxHash:          hash,
+			TxTime:          gtime.NewFromTimeStamp(int64(time)),
+			TxEventId:       eventId,
 		}
 		insertId, err := dao.NftBox.Ctx(ctx).InsertAndGetId(newBox)
 		if err != nil {

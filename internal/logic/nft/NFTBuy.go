@@ -2,7 +2,6 @@ package nft
 
 import (
 	"context"
-	"errors"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethscanner/ethereum-log-scanner/core/scanner"
@@ -15,6 +14,7 @@ import (
 	"nez-server/internal/logic/global"
 	"nez-server/internal/model/entity"
 	"nez-server/internal/service"
+	times "time"
 )
 
 type sNFTBuy struct {
@@ -26,7 +26,7 @@ func init() {
 }
 
 func NewNFTBuy() service.INFTBuy {
-	return &sNFTBuy{ContractAddress: global.NFTStakingContract}
+	return &sNFTBuy{ContractAddress: global.Buy}
 }
 
 // ConsumeEvents 消费链上事件
@@ -64,22 +64,23 @@ func (s *sNFTBuy) handleEventLog(ctx context.Context, contractAddress common.Add
 		g.Log().Error(ctx, err)
 		return err
 	}
-	event, err := contract.ParseBuyNft(log.Log)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return err
+	event, _ := contract.ParseBuyNft(log.Log)
+	//if err != nil {
+	//	g.Log().Error(ctx, err)
+	//	return err
+	//}
+	if event != nil {
+		return s.newBuy(ctx, event, log)
+		//return errors.New("parse event failed")
 	}
-	if event == nil {
-		return errors.New("parse event failed")
-	}
-	g.Log().Infof(ctx, "Handle nft buy", event.Member.Hex(), event.Token.Hex())
-	return s.newBuy(ctx, event, log)
+	//g.Log().Infof(ctx, "Handle nft buy", event.Member.Hex(), event.Token.Hex())
+	return nil
 }
 
 func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	eventId := log.Index
-	rec, err := dao.NftBuy.Ctx(ctx).One("tx_hash = ? AND event_id = ?", hash, eventId)
+	rec, err := dao.NftBuy.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ?", hash, eventId)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
@@ -106,6 +107,7 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, log *scanner
 		newBuy.Id = uint(insertId)
 		//第一版先不自动结算
 		//return service.NFTBuyReward().HandleNewBuy(ctx, newBuy)
+		return service.NFTHold().NewTransfer(ctx, event.Token.Hex(), event.Member.Hex(), 0, times.Unix(int64(time), 0))
 	}
 	return nil
 }

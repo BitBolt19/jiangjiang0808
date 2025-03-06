@@ -13,9 +13,12 @@ var (
 	InviteContract                common.Address
 	USDT                          common.Address
 	POWER                         string
-	GP                            common.Address
 	RpcUri                        string
-	NFTs                          []common.Address
+	Buy                           common.Address
+	Box                           common.Address
+	Lottery                       common.Address
+	Staking                       common.Address
+	NFTTransfer                   common.Address
 	NFTStakingContract            common.Address
 	NFTBuyRewards                 []*NFTBuyReward
 	NFTHolderRewards              []*NFTHolderReward
@@ -57,43 +60,27 @@ func init() {
 	} else {
 		RpcUri = gVer.String()
 	}
-	if gVer, err := g.Cfg().Get(ctx, "contract.address.invite"); err != nil {
+	if gVer, err := g.Cfg().Get(ctx, "contract.address.Buy"); err != nil {
 		panic(err)
 	} else {
-		InviteContract = common.HexToAddress(gVer.String())
+		Buy = common.HexToAddress(gVer.String())
 	}
-	if gVer, err := g.Cfg().Get(ctx, "contract.address.GP"); err != nil {
+	if gVer, err := g.Cfg().Get(ctx, "contract.address.Box"); err != nil {
 		panic(err)
 	} else {
-		GP = common.HexToAddress(gVer.String())
+		Box = common.HexToAddress(gVer.String())
 	}
-	if gVer, err := g.Cfg().Get(ctx, "contract.address.NFTs"); err != nil {
+	if gVer, err := g.Cfg().Get(ctx, "contract.address.Lottery"); err != nil {
 		panic(err)
 	} else {
-		if err = gVer.Structs(&NFTs); err != nil {
-			panic(err)
-		}
+		Lottery = common.HexToAddress(gVer.String())
 	}
-	if gVer, err := g.Cfg().Get(ctx, "contract.address.NFTStaking"); err != nil {
+	if gVer, err := g.Cfg().Get(ctx, "contract.address.Staking"); err != nil {
 		panic(err)
 	} else {
-		NFTStakingContract = common.HexToAddress(gVer.String())
+		Staking = common.HexToAddress(gVer.String())
 	}
-	if gVer, err := g.Cfg().Get(ctx, "contract.address.USDT"); err != nil {
-		panic(err)
-	} else {
-		USDT = common.HexToAddress(gVer.String())
-	}
-	if gVer, err := g.Cfg().Get(ctx, "contract.address.POWER"); err != nil {
-		panic(err)
-	} else {
-		POWER = gVer.String()
-	}
-	if gVer, err := g.Cfg().Get(ctx, "contract.address.NFTTokenWithdraw"); err != nil {
-		panic(err)
-	} else {
-		NFTTokenWithdraw = common.HexToAddress(gVer.String())
-	}
+
 	if gVer, err := g.Cfg().Get(ctx, "NFTBuyRewards"); err != nil {
 		panic(err)
 	} else {

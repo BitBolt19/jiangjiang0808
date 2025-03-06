@@ -2,7 +2,6 @@ package nft
 
 import (
 	"context"
-	"errors"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethscanner/ethereum-log-scanner/core/scanner"
@@ -26,7 +25,7 @@ func init() {
 }
 
 func NewNFTStaking() service.INFTStaking {
-	return &sNFTStaking{ContractAddress: global.NFTStakingContract}
+	return &sNFTStaking{ContractAddress: global.Staking}
 }
 
 // ConsumeEvents 消费链上事件
@@ -65,15 +64,19 @@ func (s *sNFTStaking) handleEventLog(ctx context.Context, contractAddress common
 		return err
 	}
 	event, err := contract.ParseStaked(log.Log)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return err
+	//if err != nil {
+	//	g.Log().Error(ctx, err)
+	//	return err
+	//}
+	//if event == nil {
+	//	return errors.New("parse event failed")
+	//}
+	//g.Log().Infof(ctx, "Handle nft staking", event.User.Hex(), event.Raw.Address.Hex())
+	//return s.newStaking(ctx, s.ContractAddress, event, log)
+	if event != nil {
+		return s.newStaking(ctx, contractAddress, event, log)
 	}
-	if event == nil {
-		return errors.New("parse event failed")
-	}
-	g.Log().Infof(ctx, "Handle nft staking", event.User.Hex(), event.Raw.Address.Hex())
-	return s.newStaking(ctx, s.ContractAddress, event, log)
+	return nil
 }
 
 func (s *sNFTStaking) newStaking(ctx context.Context, contractAddress common.Address, event *staking.StakingStaked, log *scanner.Elog) error {
