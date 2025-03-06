@@ -14,7 +14,6 @@ import (
 	"nez-server/internal/logic/global"
 	"nez-server/internal/model/entity"
 	"nez-server/internal/service"
-	times "time"
 )
 
 type sNFTBuy struct {
@@ -107,7 +106,7 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, log *scanner
 		newBuy.Id = uint(insertId)
 		//第一版先不自动结算
 		//return service.NFTBuyReward().HandleNewBuy(ctx, newBuy)
-		return service.NFTHold().NewTransfer(ctx, event.Token.Hex(), event.Member.Hex(), 0, times.Unix(int64(time), 0))
+		//service.NFTHold().NewTransfer(ctx, event.Token.Hex(), event.Member.Hex(), 0, times.Unix(int64(time), 0))
 	}
 	return nil
 }

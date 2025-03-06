@@ -68,18 +68,21 @@ func (s *sNFT) handleEventLog(ctx context.Context, contractAddress common.Addres
 	}
 	//event, err := contract.ParseTransfer(log.Log)
 	event, err := contract.ParseBuyNft(log.Log)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return err
-	}
-	if event == nil {
-		return errors.New("parse event failed")
+	//if err != nil {
+	//	g.Log().Error(ctx, err)
+	//	return err
+	//}
+	//if event == nil {
+	//	return errors.New("parse event failed")
+	//}
+	if event != nil {
+		return s.NewNFTTransfer(ctx, contractAddress, event, log)
 	}
 	//g.Log().Infof(ctx, "Handle nft transfer", From, event.Member.Hex())
-	return s.newNFTTransfer(ctx, contractAddress, event, log)
+	return nil
 }
 
-func (s *sNFT) newNFTTransfer(ctx context.Context, contractAddress common.Address, transfer *buy.BuyBuyNft, log *scanner.Elog) error {
+func (s *sNFT) NewNFTTransfer(ctx context.Context, contractAddress common.Address, transfer *buy.BuyBuyNft, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	rec, err := dao.NftTransfer.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ? ", hash, log.Index)
 	if err != nil {
@@ -89,7 +92,8 @@ func (s *sNFT) newNFTTransfer(ctx context.Context, contractAddress common.Addres
 	if !rec.IsEmpty() {
 		return nil
 	}
-	contract := contractAddress.Hex()
+	// contract 是 nft 的地址 ，对应的就是不同的 nft
+	contract := transfer.Token.Hex()
 	from := "0x0001"
 	to := transfer.Member.Hex()
 	//tokenId := transfer.TokenId.Uint64()
