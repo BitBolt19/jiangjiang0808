@@ -125,7 +125,7 @@ func (s *sNFT) NewNFTTransfer(ctx context.Context, contractAddress common.Addres
 		err = errors.New("insert rows err")
 		g.Log().Error(ctx, err, rows)
 	}
-	return service.NFTHold().NewTransfer(ctx, contract, to, 0, time.Unix(int64(eventLogTime), 0))
+	return service.NFTHold().NewTransfer(ctx, contract, to, uint64(log.Index), time.Unix(int64(eventLogTime), 0))
 }
 
 func (s *sNFT) GetLastTransfer(ctx context.Context, contractAddress string, to string, tokenId uint64) (*entity.NftTransfer, error) {

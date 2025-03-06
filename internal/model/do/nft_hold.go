@@ -16,6 +16,7 @@ type NftHold struct {
 	Account         interface{} // 账户
 	ContractAddress interface{} // NFT合约地址
 	TokenId         interface{} // NFT tokenId
+	TxEventId       interface{} //
 	HoldTime        *gtime.Time // 持有时间
 	CreatedAt       *gtime.Time //
 	UpdatedAt       *gtime.Time //

@@ -24,6 +24,7 @@ type NftHoldColumns struct {
 	Account         string // 账户
 	ContractAddress string // NFT合约地址
 	TokenId         string // NFT tokenId
+	TxEventId       string //
 	HoldTime        string // 持有时间
 	CreatedAt       string //
 	UpdatedAt       string //
@@ -35,6 +36,7 @@ var nftHoldColumns = NftHoldColumns{
 	Account:         "account",
 	ContractAddress: "contract_address",
 	TokenId:         "token_id",
+	TxEventId:       "tx_event_id",
 	HoldTime:        "hold_time",
 	CreatedAt:       "created_at",
 	UpdatedAt:       "updated_at",
