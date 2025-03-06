@@ -25,7 +25,7 @@ func init() {
 }
 
 func NewNFTbox() service.INFTbox {
-	return &sNFTbox{ContractAddress: global.Box}
+	return &sNFTbox{ContractAddress: global.Buy}
 }
 
 // ConsumeEvents 消费链上事件
@@ -63,7 +63,8 @@ func (s *sNFTbox) handleEventLog(ctx context.Context, contractAddress common.Add
 		g.Log().Error(ctx, err)
 		return err
 	}
-	event, err := contract.ParseBlindBoxNft(log.Log)
+	//event, _ := contract.ParseBlindBoxNft(log.Log)
+	event, _ := contract.ParseBuyNft(log.Log)
 	//if err != nil {
 	//	g.Log().Error(ctx, err)
 	//	return err
@@ -79,10 +80,10 @@ func (s *sNFTbox) handleEventLog(ctx context.Context, contractAddress common.Add
 	return nil
 }
 
-func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBlindBoxNft, log *scanner.Elog) error {
+func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBuyNft, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	eventId := log.Index
-	rec, err := dao.NftBox.Ctx(ctx).One("tx_hash = ? AND event_id = ?", hash, eventId)
+	rec, err := dao.NftBox.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ?", hash, eventId)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err

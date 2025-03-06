@@ -68,15 +68,17 @@ func (s *sNFTBuy) handleEventLog(ctx context.Context, contractAddress common.Add
 	//	g.Log().Error(ctx, err)
 	//	return err
 	//}
-	if event != nil {
-		return s.newBuy(ctx, event, log)
-		//return errors.New("parse event failed")
-	}
+	//if event == nil {
+	//return errors.New("parse event failed")
+	//}
 	//g.Log().Infof(ctx, "Handle nft buy", event.Member.Hex(), event.Token.Hex())
+	if event != nil {
+		return s.newBuy(ctx, event, contractAddress, log)
+	}
 	return nil
 }
 
-func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, log *scanner.Elog) error {
+func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, contractAddress common.Address, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	eventId := log.Index
 	rec, err := dao.NftBuy.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ?", hash, eventId)
@@ -92,7 +94,8 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, log *scanner
 		}
 		newBuy := &entity.NftBuy{
 			Account:         event.Member.Hex(),
-			ContractAddress: event.Token.Hex(),
+			ContractAddress: contractAddress.Hex(),
+			//ContractAddress: event.Token.Hex(),
 			//TokenId:         uint(event.TokenId.Uint64()),
 			TxHash:    hash,
 			TxTime:    gtime.NewFromTimeStamp(int64(time)),
