@@ -19,6 +19,7 @@ type hdContractEventDao struct {
 
 var (
 	// HdContractEvent is a globally accessible object for table hd_contract_event operations.
+
 	HdContractEvent = hdContractEventDao{
 		internal.NewHdContractEventDao(),
 	}

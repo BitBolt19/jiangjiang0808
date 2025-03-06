@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"context"
-
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
+	"nez-server/internal/controller/nft"
 )
 
 var (
@@ -17,7 +17,10 @@ var (
 			s := g.Server()
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
-				group.Bind()
+				group.Middleware(ghttp.MiddlewareHandlerResponse)
+				group.Bind(
+					nft.NewV1(),
+				)
 			})
 			s.Run()
 			return nil

@@ -7,8 +7,12 @@ package service
 
 import (
 	"context"
+	"nez-server/internal/logic/contract/buy"
 	"nez-server/internal/model/entity"
 	"time"
+
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethscanner/ethereum-log-scanner/core/scanner"
 )
 
 type (
@@ -34,6 +38,7 @@ type (
 	INFT interface {
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
+		NewNFTTransfer(ctx context.Context, contractAddress common.Address, transfer *buy.BuyBuyNft, log *scanner.Elog) error
 		GetLastTransfer(ctx context.Context, contractAddress string, to string, tokenId uint64) (*entity.NftTransfer, error)
 	}
 )
