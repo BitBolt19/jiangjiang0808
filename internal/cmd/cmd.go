@@ -5,7 +5,9 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
+	"nez-server/internal/controller/lottery"
 	"nez-server/internal/controller/nft"
+	"nez-server/internal/controller/staking"
 )
 
 var (
@@ -20,6 +22,8 @@ var (
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.Bind(
 					nft.NewV1(),
+					staking.NewV1(),
+					lottery.NewV1(),
 				)
 			})
 			s.Run()
