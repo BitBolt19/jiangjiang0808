@@ -17,6 +17,7 @@ type NftBuy struct {
 	TxHash          string      `json:"txHash"          orm:"tx_hash"          ` // 交易hash
 	TxTime          *gtime.Time `json:"txTime"          orm:"tx_time"          ` // 购买盲盒时间
 	TxEventId       uint        `json:"txEventId"       orm:"tx_event_id"      ` // 交易事件id
+	Status          int         `json:"status"          orm:"status"           ` // 盲盒状态
 	CreatedAt       *gtime.Time `json:"createdAt"       orm:"created_at"       ` //
 	UpdatedAt       *gtime.Time `json:"updatedAt"       orm:"updated_at"       ` //
 }

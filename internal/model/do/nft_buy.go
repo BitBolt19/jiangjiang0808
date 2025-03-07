@@ -19,6 +19,7 @@ type NftBuy struct {
 	TxHash          interface{} // 交易hash
 	TxTime          *gtime.Time // 购买盲盒时间
 	TxEventId       interface{} // 交易事件id
+	Status          interface{} // 盲盒状态
 	CreatedAt       *gtime.Time //
 	UpdatedAt       *gtime.Time //
 }

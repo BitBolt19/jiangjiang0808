@@ -1,4 +1,4 @@
-package nft
+package lottery
 
 import (
 	"context"
@@ -9,28 +9,27 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
 	"nez-server/internal/dao"
-	"nez-server/internal/logic/consts"
 	"nez-server/internal/logic/consumer"
-	"nez-server/internal/logic/contract/buy"
+	"nez-server/internal/logic/contract/lottery"
 	"nez-server/internal/logic/global"
 	"nez-server/internal/model/entity"
 	"nez-server/internal/service"
 )
 
-type sNFTBuy struct {
+type sRpClaim struct {
 	ContractAddress common.Address
 }
 
 func init() {
-	service.RegisterNFTBuy(NewNFTBuy())
+	service.RegisterRpClaim(NewRpClaim())
 }
 
-func NewNFTBuy() service.INFTBuy {
-	return &sNFTBuy{ContractAddress: global.Buy}
+func NewRpClaim() service.IRpClaim {
+	return &sRpClaim{ContractAddress: global.Lottery}
 }
 
 // ConsumeEvents 消费链上事件
-func (s *sNFTBuy) ConsumeEvents(ctx context.Context) error {
+func (s *sRpClaim) ConsumeEvents(ctx context.Context) error {
 	if logs, err := consumer.ConsumeAllEvent(ctx, s.ContractAddress.String()); err != nil {
 		return err
 	} else {
@@ -52,37 +51,29 @@ func (s *sNFTBuy) ConsumeEvents(ctx context.Context) error {
 	return nil
 }
 
-func (s *sNFTBuy) handleEventLog(ctx context.Context, contractAddress common.Address, log *scanner.Elog) error {
+func (s *sRpClaim) handleEventLog(ctx context.Context, contractAddress common.Address, log *scanner.Elog) error {
 	client, err := ethclient.Dial(global.RpcUri)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
 	}
 	defer client.Close()
-	contract, err := buy.NewBuy(contractAddress, client)
+	contract, err := lottery.NewLottery(contractAddress, client)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
 	}
-	event, _ := contract.ParseBuyNft(log.Log)
-	//if err != nil {
-	//	g.Log().Error(ctx, err)
-	//	return err
-	//}
-	//if event == nil {
-	//return errors.New("parse event failed")
-	//}
-	//g.Log().Infof(ctx, "Handle nft buy", event.Member.Hex(), event.Token.Hex())
+	event, _ := contract.ParseUserWinner(log.Log)
 	if event != nil {
-		return s.newBuy(ctx, event, contractAddress, log)
+		return s.newRpClaimlement(ctx, event, contractAddress, log)
 	}
 	return nil
 }
 
-func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, contractAddress common.Address, log *scanner.Elog) error {
+func (s *sRpClaim) newRpClaimlement(ctx context.Context, event *lottery.LotteryUserWinner, contractAddress common.Address, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	eventId := log.Index
-	rec, err := dao.NftBuy.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ?", hash, eventId)
+	rec, err := dao.RewardPoolClaim.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ?", hash, eventId)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
@@ -93,32 +84,27 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, contractAddr
 			g.Log().Error(ctx, err)
 			return err
 		}
-		newBuy := &entity.NftBuy{
-			Account:         event.Member.Hex(),
-			ContractAddress: contractAddress.Hex(),
-			//ContractAddress: event.Token.Hex(),
-			//TokenId:         uint(event.TokenId.Uint64()),
+		newBox := &entity.RewardPoolClaim{
+			Account:   event.User.Hex(),
+			PoolId:    event.Round.TrailingZeroBits(),
+			Token:     contractAddress.String(),
 			TxHash:    hash,
 			TxTime:    gtime.NewFromTimeStamp(int64(time)),
 			TxEventId: eventId,
-			Status:    consts.NFT_Buy_Box_Status,
 		}
-		insertId, err := dao.NftBuy.Ctx(ctx).InsertAndGetId(newBuy)
+		insertId, err := dao.RewardPoolClaim.Ctx(ctx).InsertAndGetId(newBox)
 		if err != nil {
 			g.Log().Error(ctx, err)
 			return err
 		}
-		newBuy.Id = uint(insertId)
-		//第一版先不自动结算
-		//return service.NFTBuyReward().HandleNewBuy(ctx, newBuy)
-		//service.NFTHold().NewTransfer(ctx, event.Token.Hex(), event.Member.Hex(), 0, times.Unix(int64(time), 0))
+		newBox.Id = uint(insertId)
 	}
 	return nil
 }
 
-func (s *sNFTBuy) GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error) {
+func (s *sRpClaim) GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error) {
 	info := make(map[string]uint64)
-	res, err := dao.NftBuy.Ctx(ctx).All("account = ?", account)
+	res, err := dao.RewardPoolClaim.Ctx(ctx).All("account = ?", account)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return nil, err
@@ -126,14 +112,14 @@ func (s *sNFTBuy) GetBuyInfo(ctx context.Context, account string) (map[string]ui
 	if res.IsEmpty() {
 		return info, nil
 	}
-	buyInfoList := make([]entity.NftBuy, 0)
-	err = res.Structs(&buyInfoList)
+	boxInfoList := make([]entity.AccountTokenBalance, 0)
+	err = res.Structs(&boxInfoList)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return nil, err
 	}
-	for _, nftBuy := range buyInfoList {
-		info[nftBuy.ContractAddress]++
+	for _, RpClaim := range boxInfoList {
+		info[RpClaim.Account]++
 	}
 	return info, nil
 }

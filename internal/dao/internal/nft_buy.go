@@ -27,6 +27,7 @@ type NftBuyColumns struct {
 	TxHash          string // 交易hash
 	TxTime          string // 购买盲盒时间
 	TxEventId       string // 交易事件id
+	Status          string // 盲盒状态
 	CreatedAt       string //
 	UpdatedAt       string //
 }
@@ -40,6 +41,7 @@ var nftBuyColumns = NftBuyColumns{
 	TxHash:          "tx_hash",
 	TxTime:          "tx_time",
 	TxEventId:       "tx_event_id",
+	Status:          "status",
 	CreatedAt:       "created_at",
 	UpdatedAt:       "updated_at",
 }

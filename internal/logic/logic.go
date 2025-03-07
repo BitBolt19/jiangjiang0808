@@ -9,5 +9,6 @@ import (
 	_ "nez-server/internal/logic/consts"
 	_ "nez-server/internal/logic/consumer"
 	_ "nez-server/internal/logic/global"
+	_ "nez-server/internal/logic/lottery"
 	_ "nez-server/internal/logic/nft"
 )

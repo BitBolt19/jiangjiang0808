@@ -107,10 +107,9 @@ func (s *sNFT) NewNFTTransfer(ctx context.Context, contractAddress common.Addres
 		ContractAddress: contract,
 		FromAddress:     from,
 		ToAddress:       to,
-		//TokenId:         uint(tokenId),
-		TxHash:    hash,
-		TxEventId: log.Index,
-		TxTime:    gtime.NewFromTimeStamp(int64(eventLogTime)),
+		TxHash:          hash,
+		TxEventId:       log.Index,
+		TxTime:          gtime.NewFromTimeStamp(int64(eventLogTime)),
 	})
 	if err != nil {
 		g.Log().Error(ctx, err)

@@ -82,7 +82,7 @@ func (s *sNFTStaking) handleEventLog(ctx context.Context, contractAddress common
 func (s *sNFTStaking) newStaking(ctx context.Context, contractAddress common.Address, event *staking.StakingStaked, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	eventId := log.Index
-	rec, err := dao.NftStaking.Ctx(ctx).One("tx_hash = ? AND event_id = ?", hash, eventId)
+	rec, err := dao.NftStaking.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ?", hash, eventId)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
