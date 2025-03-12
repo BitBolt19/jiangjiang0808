@@ -19,12 +19,12 @@ type (
 	INFTbox interface {
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
-		GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error)
+		// 当盲盒打开后，购买参数要更改为已开启
+		UpdateStatus(ctx context.Context, hash string, eventId uint) (err error)
 	}
 	INFTBuy interface {
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
-		GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error)
 	}
 	INFTHold interface {
 		NewTransfer(ctx context.Context, contract string, to string, tokenId uint64, holdTime time.Time) error

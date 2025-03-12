@@ -100,25 +100,3 @@ func (s *sRpSett) newRpSettlement(ctx context.Context, event *lottery.LotteryUse
 	}
 	return nil
 }
-
-func (s *sRpSett) GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error) {
-	info := make(map[string]uint64)
-	res, err := dao.RewardPoolSettlement.Ctx(ctx).All("account = ?", account)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	if res.IsEmpty() {
-		return info, nil
-	}
-	boxInfoList := make([]entity.AccountTokenBalance, 0)
-	err = res.Structs(&boxInfoList)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	for _, RpSett := range boxInfoList {
-		info[RpSett.Account]++
-	}
-	return info, nil
-}

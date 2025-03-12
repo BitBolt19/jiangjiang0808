@@ -13,17 +13,14 @@ type (
 	IRpClaim interface {
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
-		GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error)
 	}
 	IRpJoin interface {
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
-		GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error)
 	}
 	IRpSett interface {
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
-		GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error)
 	}
 )
 

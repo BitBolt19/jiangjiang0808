@@ -96,12 +96,10 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, contractAddr
 		newBuy := &entity.NftBuy{
 			Account:         event.Member.Hex(),
 			ContractAddress: contractAddress.Hex(),
-			//ContractAddress: event.Token.Hex(),
-			//TokenId:         uint(event.TokenId.Uint64()),
-			TxHash:    hash,
-			TxTime:    gtime.NewFromTimeStamp(int64(time)),
-			TxEventId: eventId,
-			Status:    consts.NFT_Buy_Box_Status,
+			TxHash:          hash,
+			TxTime:          gtime.NewFromTimeStamp(int64(time)),
+			TxEventId:       eventId,
+			Status:          consts.NFT_Buy_Box_Status,
 		}
 		insertId, err := dao.NftBuy.Ctx(ctx).InsertAndGetId(newBuy)
 		if err != nil {
@@ -114,26 +112,4 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, contractAddr
 		//service.NFTHold().NewTransfer(ctx, event.Token.Hex(), event.Member.Hex(), 0, times.Unix(int64(time), 0))
 	}
 	return nil
-}
-
-func (s *sNFTBuy) GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error) {
-	info := make(map[string]uint64)
-	res, err := dao.NftBuy.Ctx(ctx).All("account = ?", account)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	if res.IsEmpty() {
-		return info, nil
-	}
-	buyInfoList := make([]entity.NftBuy, 0)
-	err = res.Structs(&buyInfoList)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	for _, nftBuy := range buyInfoList {
-		info[nftBuy.ContractAddress]++
-	}
-	return info, nil
 }

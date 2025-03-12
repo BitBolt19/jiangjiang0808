@@ -9,6 +9,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
 	"nez-server/internal/dao"
+	"nez-server/internal/logic/consts"
 	"nez-server/internal/logic/consumer"
 	"nez-server/internal/logic/contract/buy"
 	"nez-server/internal/logic/global"
@@ -83,11 +84,10 @@ func (s *sNFTbox) handleEventLog(ctx context.Context, contractAddress common.Add
 }
 
 func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBuyNft, log *scanner.Elog) error {
-	s.Lock()
-	defer s.Unlock()
 	hash := log.TxHash.Hex()
 	eventId := log.Index
-	rec, err := dao.NftBox.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ?", hash, eventId)
+	//查询判断数据是否已经写入
+	rec, err := dao.NftBox.Ctx(ctx).LockUpdate().One("tx_hash = ? AND tx_event_id = ?", hash, eventId)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return err
@@ -110,41 +110,26 @@ func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBuyNft, log *scanner
 			g.Log().Error(ctx, err)
 			return err
 		}
-		// 当盲盒打开后，购买参数要更改为已开启
-		//_, err = dao.NftBuy.Ctx(ctx).
-		//	Where("tx_hash = ?", hash).
-		//	Where("contract_address = ?", event.Token.Hex()).
-		//	Where("tx_event_id = ?", eventId).
-		//	Data("status", consts.NFT_Open_Box_Status).
-		//	LockUpdate().
-		//	Update()
-		//if err != nil {
-		//	g.Log().Error(ctx, err)
-		//	return err
-		//}
 		newBox.Id = uint(insertId)
+		// 调用更新状态
+		err = s.UpdateStatus(ctx, hash, eventId)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
 
-func (s *sNFTbox) GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error) {
-	info := make(map[string]uint64)
-	res, err := dao.NftBox.Ctx(ctx).All("account = ?", account)
+// 当盲盒打开后，购买参数要更改为已开启
+func (s *sNFTbox) UpdateStatus(ctx context.Context, hash string, eventId uint) (err error) {
+	_, err = dao.NftBuy.Ctx(ctx).
+		Where("tx_hash = ?", hash).
+		Where("tx_event_id = ?", eventId).
+		Data("status", consts.NFT_Open_Box_Status).
+		Update()
 	if err != nil {
 		g.Log().Error(ctx, err)
-		return nil, err
+		return err
 	}
-	if res.IsEmpty() {
-		return info, nil
-	}
-	boxInfoList := make([]entity.NftBox, 0)
-	err = res.Structs(&boxInfoList)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	for _, NftBox := range boxInfoList {
-		info[NftBox.ContractAddress]++
-	}
-	return info, nil
+	return err
 }

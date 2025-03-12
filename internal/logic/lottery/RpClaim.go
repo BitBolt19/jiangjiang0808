@@ -101,25 +101,3 @@ func (s *sRpClaim) newRpClaimlement(ctx context.Context, event *lottery.LotteryU
 	}
 	return nil
 }
-
-func (s *sRpClaim) GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error) {
-	info := make(map[string]uint64)
-	res, err := dao.RewardPoolClaim.Ctx(ctx).All("account = ?", account)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	if res.IsEmpty() {
-		return info, nil
-	}
-	boxInfoList := make([]entity.AccountTokenBalance, 0)
-	err = res.Structs(&boxInfoList)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	for _, RpClaim := range boxInfoList {
-		info[RpClaim.Account]++
-	}
-	return info, nil
-}

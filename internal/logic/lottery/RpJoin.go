@@ -100,25 +100,3 @@ func (s *sRpJoin) newBox(ctx context.Context, event *lottery.LotteryUserParticip
 	}
 	return nil
 }
-
-func (s *sRpJoin) GetBuyInfo(ctx context.Context, account string) (map[string]uint64, error) {
-	info := make(map[string]uint64)
-	res, err := dao.RewardPoolJoin.Ctx(ctx).All("account = ?", account)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	if res.IsEmpty() {
-		return info, nil
-	}
-	boxInfoList := make([]entity.AccountTokenBalance, 0)
-	err = res.Structs(&boxInfoList)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	for _, RpJoin := range boxInfoList {
-		info[RpJoin.Account]++
-	}
-	return info, nil
-}
