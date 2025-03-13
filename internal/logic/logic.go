@@ -5,6 +5,7 @@
 package logic
 
 import (
+	_ "nez-server/internal/logic/announcement"
 	_ "nez-server/internal/logic/apiLottery"
 	_ "nez-server/internal/logic/apiNft"
 	_ "nez-server/internal/logic/apiStaking"

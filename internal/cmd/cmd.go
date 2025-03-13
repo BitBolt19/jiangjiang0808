@@ -5,6 +5,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
+	"nez-server/internal/controller/announcement"
 	"nez-server/internal/controller/lottery"
 	"nez-server/internal/controller/nft"
 	"nez-server/internal/controller/staking"
@@ -24,6 +25,7 @@ var (
 					nft.NewV1(),
 					staking.NewV1(),
 					lottery.NewV1(),
+					announcement.NewV1(),
 				)
 			})
 			s.Run()
