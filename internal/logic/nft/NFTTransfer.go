@@ -27,7 +27,7 @@ func init() {
 }
 
 func NewNFT() service.INFT {
-	return &sNFT{ContractAddress: global.Buy}
+	return &sNFT{ContractAddress: global.Box}
 }
 
 // ConsumeEvents 消费链上事件
@@ -67,7 +67,7 @@ func (s *sNFT) handleEventLog(ctx context.Context, contractAddress common.Addres
 		return err
 	}
 	//event, err := contract.ParseTransfer(log.Log)
-	event, err := contract.ParseBuyNft(log.Log)
+	event, err := contract.ParseTransferBlindBox(log.Log)
 	//if err != nil {
 	//	g.Log().Error(ctx, err)
 	//	return err
@@ -76,13 +76,13 @@ func (s *sNFT) handleEventLog(ctx context.Context, contractAddress common.Addres
 	//	return errors.New("parse event failed")
 	//}
 	if event != nil {
-		return s.NewNFTTransfer(ctx, contractAddress, event, log)
+		return s.NewNFTTransfer(ctx, s.ContractAddress, event, log)
 	}
 	//g.Log().Infof(ctx, "Handle nft transfer", From, event.Member.Hex())
 	return nil
 }
 
-func (s *sNFT) NewNFTTransfer(ctx context.Context, contractAddress common.Address, transfer *buy.BuyBuyNft, log *scanner.Elog) error {
+func (s *sNFT) NewNFTTransfer(ctx context.Context, contract common.Address, transfer *buy.BuyTransferBlindBox, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	rec, err := dao.NftTransfer.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ? ", hash, log.Index)
 	if err != nil {
@@ -92,10 +92,6 @@ func (s *sNFT) NewNFTTransfer(ctx context.Context, contractAddress common.Addres
 	if !rec.IsEmpty() {
 		return nil
 	}
-	// contract 是 nft 的地址 ，对应的就是不同的 nft
-	contract := transfer.Token.Hex()
-	from := "0x0001"
-	to := transfer.Member.Hex()
 	//tokenId := transfer.TokenId.Uint64()
 	eventLogTime, err := global.GetEventLogTime(ctx, log.Log)
 	if err != nil {
@@ -103,10 +99,11 @@ func (s *sNFT) NewNFTTransfer(ctx context.Context, contractAddress common.Addres
 		return err
 	}
 	res, err := dao.NftTransfer.Ctx(ctx).Insert(&entity.NftTransfer{
-		Account:         to,
-		ContractAddress: contract,
-		FromAddress:     from,
-		ToAddress:       to,
+		Account:         transfer.To.Hex(),
+		ContractAddress: contract.Hex(),
+		FromAddress:     transfer.From.Hex(),
+		ToAddress:       transfer.To.Hex(),
+		Amount:          transfer.Amount.Int64(),
 		TxHash:          hash,
 		TxEventId:       log.Index,
 		TxTime:          gtime.NewFromTimeStamp(int64(eventLogTime)),
@@ -124,7 +121,7 @@ func (s *sNFT) NewNFTTransfer(ctx context.Context, contractAddress common.Addres
 		err = errors.New("insert rows err")
 		g.Log().Error(ctx, err, rows)
 	}
-	return service.NFTHold().NewTransfer(ctx, contract, to, uint64(log.Index), time.Unix(int64(eventLogTime), 0))
+	return service.NFTHold().NewTransfer(ctx, contract.Hex(), transfer.To.Hex(), uint64(log.Index), time.Unix(int64(eventLogTime), 0))
 }
 
 func (s *sNFT) GetLastTransfer(ctx context.Context, contractAddress string, to string, tokenId uint64) (*entity.NftTransfer, error) {

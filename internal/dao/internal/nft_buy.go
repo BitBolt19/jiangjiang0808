@@ -24,6 +24,7 @@ type NftBuyColumns struct {
 	Account         string // 账户
 	ContractAddress string // NFT合约地址
 	TokenId         string // NFT tokenId
+	Amount          string // 数量
 	TxHash          string // 交易hash
 	TxTime          string // 购买盲盒时间
 	TxEventId       string // 交易事件id
@@ -38,6 +39,7 @@ var nftBuyColumns = NftBuyColumns{
 	Account:         "account",
 	ContractAddress: "contract_address",
 	TokenId:         "token_id",
+	Amount:          "amount",
 	TxHash:          "tx_hash",
 	TxTime:          "tx_time",
 	TxEventId:       "tx_event_id",

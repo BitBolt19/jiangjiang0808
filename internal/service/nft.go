@@ -20,7 +20,7 @@ type (
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
 		// 当盲盒打开后，购买参数要更改为已开启
-		UpdateStatus(ctx context.Context, hash string, eventId uint) (err error)
+		UpdateStatus(ctx context.Context, event *buy.BuyOpenBlindBox, eventId uint) (err error)
 	}
 	INFTBuy interface {
 		// ConsumeEvents 消费链上事件
@@ -38,7 +38,7 @@ type (
 	INFT interface {
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
-		NewNFTTransfer(ctx context.Context, contractAddress common.Address, transfer *buy.BuyBuyNft, log *scanner.Elog) error
+		NewNFTTransfer(ctx context.Context, contract common.Address, transfer *buy.BuyTransferBlindBox, log *scanner.Elog) error
 		GetLastTransfer(ctx context.Context, contractAddress string, to string, tokenId uint64) (*entity.NftTransfer, error)
 	}
 )

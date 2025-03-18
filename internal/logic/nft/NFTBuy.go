@@ -26,7 +26,7 @@ func init() {
 }
 
 func NewNFTBuy() service.INFTBuy {
-	return &sNFTBuy{ContractAddress: global.Buy}
+	return &sNFTBuy{ContractAddress: global.Box}
 }
 
 // ConsumeEvents 消费链上事件
@@ -64,7 +64,7 @@ func (s *sNFTBuy) handleEventLog(ctx context.Context, contractAddress common.Add
 		g.Log().Error(ctx, err)
 		return err
 	}
-	event, _ := contract.ParseBuyNft(log.Log)
+	event, _ := contract.ParseBuyBlindBox(log.Log)
 	//if err != nil {
 	//	g.Log().Error(ctx, err)
 	//	return err
@@ -79,7 +79,7 @@ func (s *sNFTBuy) handleEventLog(ctx context.Context, contractAddress common.Add
 	return nil
 }
 
-func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, contractAddress common.Address, log *scanner.Elog) error {
+func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyBlindBox, contractAddress common.Address, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	eventId := log.Index
 	rec, err := dao.NftBuy.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ?", hash, eventId)
@@ -96,6 +96,7 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyNft, contractAddr
 		newBuy := &entity.NftBuy{
 			Account:         event.Member.Hex(),
 			ContractAddress: contractAddress.Hex(),
+			Amount:          event.Amount.Int64(),
 			TxHash:          hash,
 			TxTime:          gtime.NewFromTimeStamp(int64(time)),
 			TxEventId:       eventId,

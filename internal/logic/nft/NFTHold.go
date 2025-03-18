@@ -76,7 +76,6 @@ func (s *sNFTHold) NewTransfer(ctx context.Context, contract string, to string, 
 		}
 	}
 	return err
-	//todo 这个地方的  return  的作用？
 	//return service.NFTHolderReward().HandleNewNFTHold(ctx, &NFTHold)
 }
 

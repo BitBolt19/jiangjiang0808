@@ -67,7 +67,7 @@ func (s *sNFTbox) handleEventLog(ctx context.Context, contractAddress common.Add
 		return err
 	}
 	//event, _ := contract.ParseBlindBoxNft(log.Log)
-	event, _ := contract.ParseBuyNft(log.Log)
+	event, _ := contract.ParseOpenBlindBox(log.Log)
 	//if err != nil {
 	//	g.Log().Error(ctx, err)
 	//	return err
@@ -83,7 +83,7 @@ func (s *sNFTbox) handleEventLog(ctx context.Context, contractAddress common.Add
 	return nil
 }
 
-func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBuyNft, log *scanner.Elog) error {
+func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyOpenBlindBox, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	eventId := log.Index
 	//查询判断数据是否已经写入
@@ -101,6 +101,7 @@ func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBuyNft, log *scanner
 		newBox := &entity.NftBox{
 			Account:         event.Member.Hex(),
 			ContractAddress: event.Token.Hex(),
+			Amount:          event.Amount.Int64(),
 			TxHash:          hash,
 			TxTime:          gtime.NewFromTimeStamp(int64(time)),
 			TxEventId:       eventId,
@@ -112,7 +113,7 @@ func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBuyNft, log *scanner
 		}
 		newBox.Id = uint(insertId)
 		// 调用更新状态
-		err = s.UpdateStatus(ctx, hash, eventId)
+		err = s.UpdateStatus(ctx, event, eventId)
 		if err != nil {
 			return err
 		}
@@ -121,9 +122,9 @@ func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyBuyNft, log *scanner
 }
 
 // 当盲盒打开后，购买参数要更改为已开启
-func (s *sNFTbox) UpdateStatus(ctx context.Context, hash string, eventId uint) (err error) {
+func (s *sNFTbox) UpdateStatus(ctx context.Context, event *buy.BuyOpenBlindBox, eventId uint) (err error) {
 	_, err = dao.NftBuy.Ctx(ctx).
-		Where("tx_hash = ?", hash).
+		Where("account = ?", event.Member.Hex()).
 		Where("tx_event_id = ?", eventId).
 		Data("status", consts.NFT_Open_Box_Status).
 		Update()

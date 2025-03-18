@@ -25,6 +25,7 @@ type NftTransferColumns struct {
 	ContractAddress string // NFT合约地址
 	FromAddress     string // 发送方
 	ToAddress       string // 接收方
+	Amount          string // 数量
 	TokenId         string // NFT tokenId
 	TxHash          string // 交易hash
 	TxEventId       string // 交替事件id
@@ -40,6 +41,7 @@ var nftTransferColumns = NftTransferColumns{
 	ContractAddress: "contract_address",
 	FromAddress:     "from_address",
 	ToAddress:       "to_address",
+	Amount:          "amount",
 	TokenId:         "token_id",
 	TxHash:          "tx_hash",
 	TxEventId:       "tx_event_id",

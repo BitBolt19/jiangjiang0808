@@ -421,7 +421,7 @@
       },
       {
         "internalType": "uint256[]",
-        "name": "_amunts",
+        "name": "_amounts",
         "type": "uint256[]"
       }
     ],
@@ -434,12 +434,12 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "member",
+        "name": "_member",
         "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "amount",
+        "name": "_amount",
         "type": "uint256"
       }
     ],
@@ -503,12 +503,12 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "owner",
+        "name": "_owner",
         "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "index",
+        "name": "_index",
         "type": "uint256"
       }
     ],
@@ -774,7 +774,7 @@
     "inputs": [
       {
         "internalType": "bytes4",
-        "name": "interfaceId",
+        "name": "_interfaceId",
         "type": "bytes4"
       }
     ],

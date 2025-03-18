@@ -12,7 +12,7 @@ import (
 type Announcement struct {
 	g.Meta    `orm:"table:announcement, do:true"`
 	Id        interface{} //
-	Type      interface{} // announcement类型: 1:公告 2:帮助中心 3.首页弹出 4.banner
+	Type      interface{} // 类型: 1:公告 2:帮助中心 3.首页弹出 4.新闻资讯
 	Language  interface{} // 语言类型
 	Title     interface{} // 标题
 	Link      interface{} // 链接地址

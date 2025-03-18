@@ -21,7 +21,7 @@ type AnnouncementDao struct {
 // AnnouncementColumns defines and stores column names for the table announcement.
 type AnnouncementColumns struct {
 	Id        string //
-	Type      string // announcement类型: 1:公告 2:帮助中心 3.首页弹出 4.banner
+	Type      string // 类型: 1:公告 2:帮助中心 3.首页弹出 4.新闻资讯
 	Language  string // 语言类型
 	Title     string // 标题
 	Link      string // 链接地址

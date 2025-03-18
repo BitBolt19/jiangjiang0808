@@ -15,6 +15,7 @@ type NftTransfer struct {
 	ContractAddress string      `json:"contractAddress" orm:"contract_address" ` // NFT合约地址
 	FromAddress     string      `json:"fromAddress"     orm:"from_address"     ` // 发送方
 	ToAddress       string      `json:"toAddress"       orm:"to_address"       ` // 接收方
+	Amount          int64       `json:"amount"          orm:"amount"           ` // 数量
 	TokenId         uint        `json:"tokenId"         orm:"token_id"         ` // NFT tokenId
 	TxHash          string      `json:"txHash"          orm:"tx_hash"          ` // 交易hash
 	TxEventId       uint        `json:"txEventId"       orm:"tx_event_id"      ` // 交替事件id

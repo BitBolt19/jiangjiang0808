@@ -39,7 +39,7 @@ type BuyBatchPrice struct {
 
 // BuyMetaData contains all meta data concerning the Buy contract.
 var BuyMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"name\":\"AccessControlBadConfirmation\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"neededRole\",\"type\":\"bytes32\"}],\"name\":\"AccessControlUnauthorizedAccount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidInitialization\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NotInitializing\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"BlindBoxNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"BuyNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"EIP712DomainChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"version\",\"type\":\"uint64\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"batchPrices\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"ethPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"usdPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nezPrice\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"blindBox\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"blindBoxEnable\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"buyEnable\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"buyNft\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_tokens\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_amounts\",\"type\":\"uint256[]\"}],\"name\":\"buyNfts\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"clearNftPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"eip712Domain\",\"outputs\":[{\"internalType\":\"bytes1\",\"name\":\"fields\",\"type\":\"bytes1\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"version\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"chainId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"verifyingContract\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"uint256[]\",\"name\":\"extensions\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"enable\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"getBatchIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"getBatchPrice\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"ethPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"usdPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nezPrice\",\"type\":\"uint256\"}],\"internalType\":\"structBuy.BatchPrice\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"name\":\"getNftPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"id\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_tokens\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"_receiveAddress\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nez\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"nftPrices\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"ethPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"usdPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nezPrice\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"receiveAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"callerConfirmation\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_buyEnable\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"_blindBoxEnable\",\"type\":\"bool\"}],\"name\":\"setBuyAndBlindBoxEnable\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_enable\",\"type\":\"bool\"}],\"name\":\"setEnable\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_ethPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_usdPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_nezPrice\",\"type\":\"uint256\"}],\"name\":\"setNftPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_receiveAddress\",\"type\":\"address\"}],\"name\":\"setReceiveAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_tokens\",\"type\":\"address[]\"}],\"name\":\"setUsdt\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"usdt\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[],\"name\":\"AccessControlBadConfirmation\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"neededRole\",\"type\":\"bytes32\"}],\"name\":\"AccessControlUnauthorizedAccount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidInitialization\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NotInitializing\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"BuyBlindBox\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"BuyNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"version\",\"type\":\"uint64\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"OpenBlindBox\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TransferBlindBox\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_ethPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_usdPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_nezPrice\",\"type\":\"uint256\"}],\"name\":\"addBatchPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"batchPrices\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"ethPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"usdPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nezPrice\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"blindBoxEnable\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"buyBlindBox\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"buyEnable\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"buyNft\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_tokens\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_amounts\",\"type\":\"uint256[]\"}],\"name\":\"buyNfts\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"clearNftPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"enable\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"getBatchIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"getBatchPrice\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"ethPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"usdPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nezPrice\",\"type\":\"uint256\"}],\"internalType\":\"structBuy.BatchPrice\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"name\":\"getNftPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_member\",\"type\":\"address\"}],\"name\":\"getUserBlindBoxes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"healthcheck\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"id\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_tokens\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"_receiveAddress\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nez\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"nftPrices\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"ethPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"usdPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nezPrice\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"openBlindBox\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"receiveAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"callerConfirmation\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_buyEnable\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"_blindBoxEnable\",\"type\":\"bool\"}],\"name\":\"setBuyAndBlindBoxEnable\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_enable\",\"type\":\"bool\"}],\"name\":\"setEnable\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_ethPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_usdPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_nezPrice\",\"type\":\"uint256\"}],\"name\":\"setNftPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_receiveAddress\",\"type\":\"address\"}],\"name\":\"setReceiveAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_tokens\",\"type\":\"address[]\"}],\"name\":\"setTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"transferBlindBox\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"usdt\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userBlindBoxes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
 }
 
 // BuyABI is the input ABI used to generate the binding from.
@@ -336,76 +336,6 @@ func (_Buy *BuyCallerSession) BuyEnable() (bool, error) {
 	return _Buy.Contract.BuyEnable(&_Buy.CallOpts)
 }
 
-// Eip712Domain is a free data retrieval call binding the contract method 0x84b0196e.
-//
-// Solidity: function eip712Domain() view returns(bytes1 fields, string name, string version, uint256 chainId, address verifyingContract, bytes32 salt, uint256[] extensions)
-func (_Buy *BuyCaller) Eip712Domain(opts *bind.CallOpts) (struct {
-	Fields            [1]byte
-	Name              string
-	Version           string
-	ChainId           *big.Int
-	VerifyingContract common.Address
-	Salt              [32]byte
-	Extensions        []*big.Int
-}, error) {
-	var out []interface{}
-	err := _Buy.contract.Call(opts, &out, "eip712Domain")
-
-	outstruct := new(struct {
-		Fields            [1]byte
-		Name              string
-		Version           string
-		ChainId           *big.Int
-		VerifyingContract common.Address
-		Salt              [32]byte
-		Extensions        []*big.Int
-	})
-	if err != nil {
-		return *outstruct, err
-	}
-
-	outstruct.Fields = *abi.ConvertType(out[0], new([1]byte)).(*[1]byte)
-	outstruct.Name = *abi.ConvertType(out[1], new(string)).(*string)
-	outstruct.Version = *abi.ConvertType(out[2], new(string)).(*string)
-	outstruct.ChainId = *abi.ConvertType(out[3], new(*big.Int)).(**big.Int)
-	outstruct.VerifyingContract = *abi.ConvertType(out[4], new(common.Address)).(*common.Address)
-	outstruct.Salt = *abi.ConvertType(out[5], new([32]byte)).(*[32]byte)
-	outstruct.Extensions = *abi.ConvertType(out[6], new([]*big.Int)).(*[]*big.Int)
-
-	return *outstruct, err
-
-}
-
-// Eip712Domain is a free data retrieval call binding the contract method 0x84b0196e.
-//
-// Solidity: function eip712Domain() view returns(bytes1 fields, string name, string version, uint256 chainId, address verifyingContract, bytes32 salt, uint256[] extensions)
-func (_Buy *BuySession) Eip712Domain() (struct {
-	Fields            [1]byte
-	Name              string
-	Version           string
-	ChainId           *big.Int
-	VerifyingContract common.Address
-	Salt              [32]byte
-	Extensions        []*big.Int
-}, error) {
-	return _Buy.Contract.Eip712Domain(&_Buy.CallOpts)
-}
-
-// Eip712Domain is a free data retrieval call binding the contract method 0x84b0196e.
-//
-// Solidity: function eip712Domain() view returns(bytes1 fields, string name, string version, uint256 chainId, address verifyingContract, bytes32 salt, uint256[] extensions)
-func (_Buy *BuyCallerSession) Eip712Domain() (struct {
-	Fields            [1]byte
-	Name              string
-	Version           string
-	ChainId           *big.Int
-	VerifyingContract common.Address
-	Salt              [32]byte
-	Extensions        []*big.Int
-}, error) {
-	return _Buy.Contract.Eip712Domain(&_Buy.CallOpts)
-}
-
 // Enable is a free data retrieval call binding the contract method 0xa3907d71.
 //
 // Solidity: function enable() view returns(bool)
@@ -563,6 +493,37 @@ func (_Buy *BuyCallerSession) GetRoleAdmin(role [32]byte) ([32]byte, error) {
 	return _Buy.Contract.GetRoleAdmin(&_Buy.CallOpts, role)
 }
 
+// GetUserBlindBoxes is a free data retrieval call binding the contract method 0xf9f6689a.
+//
+// Solidity: function getUserBlindBoxes(address _member) view returns(uint256)
+func (_Buy *BuyCaller) GetUserBlindBoxes(opts *bind.CallOpts, _member common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _Buy.contract.Call(opts, &out, "getUserBlindBoxes", _member)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetUserBlindBoxes is a free data retrieval call binding the contract method 0xf9f6689a.
+//
+// Solidity: function getUserBlindBoxes(address _member) view returns(uint256)
+func (_Buy *BuySession) GetUserBlindBoxes(_member common.Address) (*big.Int, error) {
+	return _Buy.Contract.GetUserBlindBoxes(&_Buy.CallOpts, _member)
+}
+
+// GetUserBlindBoxes is a free data retrieval call binding the contract method 0xf9f6689a.
+//
+// Solidity: function getUserBlindBoxes(address _member) view returns(uint256)
+func (_Buy *BuyCallerSession) GetUserBlindBoxes(_member common.Address) (*big.Int, error) {
+	return _Buy.Contract.GetUserBlindBoxes(&_Buy.CallOpts, _member)
+}
+
 // HasRole is a free data retrieval call binding the contract method 0x91d14854.
 //
 // Solidity: function hasRole(bytes32 role, address account) view returns(bool)
@@ -592,6 +553,35 @@ func (_Buy *BuySession) HasRole(role [32]byte, account common.Address) (bool, er
 // Solidity: function hasRole(bytes32 role, address account) view returns(bool)
 func (_Buy *BuyCallerSession) HasRole(role [32]byte, account common.Address) (bool, error) {
 	return _Buy.Contract.HasRole(&_Buy.CallOpts, role, account)
+}
+
+// Healthcheck is a free data retrieval call binding the contract method 0x4f42fc02.
+//
+// Solidity: function healthcheck() view returns()
+func (_Buy *BuyCaller) Healthcheck(opts *bind.CallOpts) error {
+	var out []interface{}
+	err := _Buy.contract.Call(opts, &out, "healthcheck")
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// Healthcheck is a free data retrieval call binding the contract method 0x4f42fc02.
+//
+// Solidity: function healthcheck() view returns()
+func (_Buy *BuySession) Healthcheck() error {
+	return _Buy.Contract.Healthcheck(&_Buy.CallOpts)
+}
+
+// Healthcheck is a free data retrieval call binding the contract method 0x4f42fc02.
+//
+// Solidity: function healthcheck() view returns()
+func (_Buy *BuyCallerSession) Healthcheck() error {
+	return _Buy.Contract.Healthcheck(&_Buy.CallOpts)
 }
 
 // Id is a free data retrieval call binding the contract method 0xaf640d0f.
@@ -804,25 +794,77 @@ func (_Buy *BuyCallerSession) Usdt() (common.Address, error) {
 	return _Buy.Contract.Usdt(&_Buy.CallOpts)
 }
 
-// BlindBox is a paid mutator transaction binding the contract method 0x6a4aeeb8.
+// UserBlindBoxes is a free data retrieval call binding the contract method 0xca6bd0fb.
 //
-// Solidity: function blindBox() payable returns()
-func (_Buy *BuyTransactor) BlindBox(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Buy.contract.Transact(opts, "blindBox")
+// Solidity: function userBlindBoxes(address ) view returns(uint256)
+func (_Buy *BuyCaller) UserBlindBoxes(opts *bind.CallOpts, arg0 common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _Buy.contract.Call(opts, &out, "userBlindBoxes", arg0)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
-// BlindBox is a paid mutator transaction binding the contract method 0x6a4aeeb8.
+// UserBlindBoxes is a free data retrieval call binding the contract method 0xca6bd0fb.
 //
-// Solidity: function blindBox() payable returns()
-func (_Buy *BuySession) BlindBox() (*types.Transaction, error) {
-	return _Buy.Contract.BlindBox(&_Buy.TransactOpts)
+// Solidity: function userBlindBoxes(address ) view returns(uint256)
+func (_Buy *BuySession) UserBlindBoxes(arg0 common.Address) (*big.Int, error) {
+	return _Buy.Contract.UserBlindBoxes(&_Buy.CallOpts, arg0)
 }
 
-// BlindBox is a paid mutator transaction binding the contract method 0x6a4aeeb8.
+// UserBlindBoxes is a free data retrieval call binding the contract method 0xca6bd0fb.
 //
-// Solidity: function blindBox() payable returns()
-func (_Buy *BuyTransactorSession) BlindBox() (*types.Transaction, error) {
-	return _Buy.Contract.BlindBox(&_Buy.TransactOpts)
+// Solidity: function userBlindBoxes(address ) view returns(uint256)
+func (_Buy *BuyCallerSession) UserBlindBoxes(arg0 common.Address) (*big.Int, error) {
+	return _Buy.Contract.UserBlindBoxes(&_Buy.CallOpts, arg0)
+}
+
+// AddBatchPrice is a paid mutator transaction binding the contract method 0xc400a2a7.
+//
+// Solidity: function addBatchPrice(uint256 _amount, uint256 _ethPrice, uint256 _usdPrice, uint256 _nezPrice) returns()
+func (_Buy *BuyTransactor) AddBatchPrice(opts *bind.TransactOpts, _amount *big.Int, _ethPrice *big.Int, _usdPrice *big.Int, _nezPrice *big.Int) (*types.Transaction, error) {
+	return _Buy.contract.Transact(opts, "addBatchPrice", _amount, _ethPrice, _usdPrice, _nezPrice)
+}
+
+// AddBatchPrice is a paid mutator transaction binding the contract method 0xc400a2a7.
+//
+// Solidity: function addBatchPrice(uint256 _amount, uint256 _ethPrice, uint256 _usdPrice, uint256 _nezPrice) returns()
+func (_Buy *BuySession) AddBatchPrice(_amount *big.Int, _ethPrice *big.Int, _usdPrice *big.Int, _nezPrice *big.Int) (*types.Transaction, error) {
+	return _Buy.Contract.AddBatchPrice(&_Buy.TransactOpts, _amount, _ethPrice, _usdPrice, _nezPrice)
+}
+
+// AddBatchPrice is a paid mutator transaction binding the contract method 0xc400a2a7.
+//
+// Solidity: function addBatchPrice(uint256 _amount, uint256 _ethPrice, uint256 _usdPrice, uint256 _nezPrice) returns()
+func (_Buy *BuyTransactorSession) AddBatchPrice(_amount *big.Int, _ethPrice *big.Int, _usdPrice *big.Int, _nezPrice *big.Int) (*types.Transaction, error) {
+	return _Buy.Contract.AddBatchPrice(&_Buy.TransactOpts, _amount, _ethPrice, _usdPrice, _nezPrice)
+}
+
+// BuyBlindBox is a paid mutator transaction binding the contract method 0x62977ae7.
+//
+// Solidity: function buyBlindBox(uint256 _amount) payable returns()
+func (_Buy *BuyTransactor) BuyBlindBox(opts *bind.TransactOpts, _amount *big.Int) (*types.Transaction, error) {
+	return _Buy.contract.Transact(opts, "buyBlindBox", _amount)
+}
+
+// BuyBlindBox is a paid mutator transaction binding the contract method 0x62977ae7.
+//
+// Solidity: function buyBlindBox(uint256 _amount) payable returns()
+func (_Buy *BuySession) BuyBlindBox(_amount *big.Int) (*types.Transaction, error) {
+	return _Buy.Contract.BuyBlindBox(&_Buy.TransactOpts, _amount)
+}
+
+// BuyBlindBox is a paid mutator transaction binding the contract method 0x62977ae7.
+//
+// Solidity: function buyBlindBox(uint256 _amount) payable returns()
+func (_Buy *BuyTransactorSession) BuyBlindBox(_amount *big.Int) (*types.Transaction, error) {
+	return _Buy.Contract.BuyBlindBox(&_Buy.TransactOpts, _amount)
 }
 
 // BuyNft is a paid mutator transaction binding the contract method 0x4ddf4f8f.
@@ -928,6 +970,27 @@ func (_Buy *BuySession) Initialize(_tokens []common.Address, _receiveAddress com
 // Solidity: function initialize(address[] _tokens, address _receiveAddress) returns()
 func (_Buy *BuyTransactorSession) Initialize(_tokens []common.Address, _receiveAddress common.Address) (*types.Transaction, error) {
 	return _Buy.Contract.Initialize(&_Buy.TransactOpts, _tokens, _receiveAddress)
+}
+
+// OpenBlindBox is a paid mutator transaction binding the contract method 0xd2df81ae.
+//
+// Solidity: function openBlindBox(uint256 _amount) returns()
+func (_Buy *BuyTransactor) OpenBlindBox(opts *bind.TransactOpts, _amount *big.Int) (*types.Transaction, error) {
+	return _Buy.contract.Transact(opts, "openBlindBox", _amount)
+}
+
+// OpenBlindBox is a paid mutator transaction binding the contract method 0xd2df81ae.
+//
+// Solidity: function openBlindBox(uint256 _amount) returns()
+func (_Buy *BuySession) OpenBlindBox(_amount *big.Int) (*types.Transaction, error) {
+	return _Buy.Contract.OpenBlindBox(&_Buy.TransactOpts, _amount)
+}
+
+// OpenBlindBox is a paid mutator transaction binding the contract method 0xd2df81ae.
+//
+// Solidity: function openBlindBox(uint256 _amount) returns()
+func (_Buy *BuyTransactorSession) OpenBlindBox(_amount *big.Int) (*types.Transaction, error) {
+	return _Buy.Contract.OpenBlindBox(&_Buy.TransactOpts, _amount)
 }
 
 // RenounceRole is a paid mutator transaction binding the contract method 0x36568abe.
@@ -1056,30 +1119,51 @@ func (_Buy *BuyTransactorSession) SetReceiveAddress(_receiveAddress common.Addre
 	return _Buy.Contract.SetReceiveAddress(&_Buy.TransactOpts, _receiveAddress)
 }
 
-// SetUsdt is a paid mutator transaction binding the contract method 0x1b7e506c.
+// SetTokens is a paid mutator transaction binding the contract method 0x625adaf2.
 //
-// Solidity: function setUsdt(address[] _tokens) returns()
-func (_Buy *BuyTransactor) SetUsdt(opts *bind.TransactOpts, _tokens []common.Address) (*types.Transaction, error) {
-	return _Buy.contract.Transact(opts, "setUsdt", _tokens)
+// Solidity: function setTokens(address[] _tokens) returns()
+func (_Buy *BuyTransactor) SetTokens(opts *bind.TransactOpts, _tokens []common.Address) (*types.Transaction, error) {
+	return _Buy.contract.Transact(opts, "setTokens", _tokens)
 }
 
-// SetUsdt is a paid mutator transaction binding the contract method 0x1b7e506c.
+// SetTokens is a paid mutator transaction binding the contract method 0x625adaf2.
 //
-// Solidity: function setUsdt(address[] _tokens) returns()
-func (_Buy *BuySession) SetUsdt(_tokens []common.Address) (*types.Transaction, error) {
-	return _Buy.Contract.SetUsdt(&_Buy.TransactOpts, _tokens)
+// Solidity: function setTokens(address[] _tokens) returns()
+func (_Buy *BuySession) SetTokens(_tokens []common.Address) (*types.Transaction, error) {
+	return _Buy.Contract.SetTokens(&_Buy.TransactOpts, _tokens)
 }
 
-// SetUsdt is a paid mutator transaction binding the contract method 0x1b7e506c.
+// SetTokens is a paid mutator transaction binding the contract method 0x625adaf2.
 //
-// Solidity: function setUsdt(address[] _tokens) returns()
-func (_Buy *BuyTransactorSession) SetUsdt(_tokens []common.Address) (*types.Transaction, error) {
-	return _Buy.Contract.SetUsdt(&_Buy.TransactOpts, _tokens)
+// Solidity: function setTokens(address[] _tokens) returns()
+func (_Buy *BuyTransactorSession) SetTokens(_tokens []common.Address) (*types.Transaction, error) {
+	return _Buy.Contract.SetTokens(&_Buy.TransactOpts, _tokens)
 }
 
-// BuyBlindBoxNftIterator is returned from FilterBlindBoxNft and is used to iterate over the raw logs and unpacked data for BlindBoxNft events raised by the Buy contract.
-type BuyBlindBoxNftIterator struct {
-	Event *BuyBlindBoxNft // Event containing the contract specifics and raw log
+// TransferBlindBox is a paid mutator transaction binding the contract method 0x674b6cd9.
+//
+// Solidity: function transferBlindBox(address _to, uint256 _amount) returns()
+func (_Buy *BuyTransactor) TransferBlindBox(opts *bind.TransactOpts, _to common.Address, _amount *big.Int) (*types.Transaction, error) {
+	return _Buy.contract.Transact(opts, "transferBlindBox", _to, _amount)
+}
+
+// TransferBlindBox is a paid mutator transaction binding the contract method 0x674b6cd9.
+//
+// Solidity: function transferBlindBox(address _to, uint256 _amount) returns()
+func (_Buy *BuySession) TransferBlindBox(_to common.Address, _amount *big.Int) (*types.Transaction, error) {
+	return _Buy.Contract.TransferBlindBox(&_Buy.TransactOpts, _to, _amount)
+}
+
+// TransferBlindBox is a paid mutator transaction binding the contract method 0x674b6cd9.
+//
+// Solidity: function transferBlindBox(address _to, uint256 _amount) returns()
+func (_Buy *BuyTransactorSession) TransferBlindBox(_to common.Address, _amount *big.Int) (*types.Transaction, error) {
+	return _Buy.Contract.TransferBlindBox(&_Buy.TransactOpts, _to, _amount)
+}
+
+// BuyBuyBlindBoxIterator is returned from FilterBuyBlindBox and is used to iterate over the raw logs and unpacked data for BuyBlindBox events raised by the Buy contract.
+type BuyBuyBlindBoxIterator struct {
+	Event *BuyBuyBlindBox // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -1093,7 +1177,7 @@ type BuyBlindBoxNftIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *BuyBlindBoxNftIterator) Next() bool {
+func (it *BuyBuyBlindBoxIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -1102,7 +1186,7 @@ func (it *BuyBlindBoxNftIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(BuyBlindBoxNft)
+			it.Event = new(BuyBuyBlindBox)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -1117,7 +1201,7 @@ func (it *BuyBlindBoxNftIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(BuyBlindBoxNft)
+		it.Event = new(BuyBuyBlindBox)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -1133,53 +1217,52 @@ func (it *BuyBlindBoxNftIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *BuyBlindBoxNftIterator) Error() error {
+func (it *BuyBuyBlindBoxIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *BuyBlindBoxNftIterator) Close() error {
+func (it *BuyBuyBlindBoxIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// BuyBlindBoxNft represents a BlindBoxNft event raised by the Buy contract.
-type BuyBlindBoxNft struct {
+// BuyBuyBlindBox represents a BuyBlindBox event raised by the Buy contract.
+type BuyBuyBlindBox struct {
 	Member common.Address
-	Token  common.Address
 	Amount *big.Int
 	Raw    types.Log // Blockchain specific contextual infos
 }
 
-// FilterBlindBoxNft is a free log retrieval operation binding the contract event 0xf3795295e85ef0eaa757ef4dfc633bcb74d63f86587326941fa3fbd305c520b6.
+// FilterBuyBlindBox is a free log retrieval operation binding the contract event 0x996fb5df80ed4cb9750c208a37f2da0935db8267fdf2dbd81e2fba06e57a55d9.
 //
-// Solidity: event BlindBoxNft(address indexed member, address token, uint256 amount)
-func (_Buy *BuyFilterer) FilterBlindBoxNft(opts *bind.FilterOpts, member []common.Address) (*BuyBlindBoxNftIterator, error) {
+// Solidity: event BuyBlindBox(address indexed member, uint256 amount)
+func (_Buy *BuyFilterer) FilterBuyBlindBox(opts *bind.FilterOpts, member []common.Address) (*BuyBuyBlindBoxIterator, error) {
 
 	var memberRule []interface{}
 	for _, memberItem := range member {
 		memberRule = append(memberRule, memberItem)
 	}
 
-	logs, sub, err := _Buy.contract.FilterLogs(opts, "BlindBoxNft", memberRule)
+	logs, sub, err := _Buy.contract.FilterLogs(opts, "BuyBlindBox", memberRule)
 	if err != nil {
 		return nil, err
 	}
-	return &BuyBlindBoxNftIterator{contract: _Buy.contract, event: "BlindBoxNft", logs: logs, sub: sub}, nil
+	return &BuyBuyBlindBoxIterator{contract: _Buy.contract, event: "BuyBlindBox", logs: logs, sub: sub}, nil
 }
 
-// WatchBlindBoxNft is a free log subscription operation binding the contract event 0xf3795295e85ef0eaa757ef4dfc633bcb74d63f86587326941fa3fbd305c520b6.
+// WatchBuyBlindBox is a free log subscription operation binding the contract event 0x996fb5df80ed4cb9750c208a37f2da0935db8267fdf2dbd81e2fba06e57a55d9.
 //
-// Solidity: event BlindBoxNft(address indexed member, address token, uint256 amount)
-func (_Buy *BuyFilterer) WatchBlindBoxNft(opts *bind.WatchOpts, sink chan<- *BuyBlindBoxNft, member []common.Address) (event.Subscription, error) {
+// Solidity: event BuyBlindBox(address indexed member, uint256 amount)
+func (_Buy *BuyFilterer) WatchBuyBlindBox(opts *bind.WatchOpts, sink chan<- *BuyBuyBlindBox, member []common.Address) (event.Subscription, error) {
 
 	var memberRule []interface{}
 	for _, memberItem := range member {
 		memberRule = append(memberRule, memberItem)
 	}
 
-	logs, sub, err := _Buy.contract.WatchLogs(opts, "BlindBoxNft", memberRule)
+	logs, sub, err := _Buy.contract.WatchLogs(opts, "BuyBlindBox", memberRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1189,8 +1272,8 @@ func (_Buy *BuyFilterer) WatchBlindBoxNft(opts *bind.WatchOpts, sink chan<- *Buy
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(BuyBlindBoxNft)
-				if err := _Buy.contract.UnpackLog(event, "BlindBoxNft", log); err != nil {
+				event := new(BuyBuyBlindBox)
+				if err := _Buy.contract.UnpackLog(event, "BuyBlindBox", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -1211,12 +1294,12 @@ func (_Buy *BuyFilterer) WatchBlindBoxNft(opts *bind.WatchOpts, sink chan<- *Buy
 	}), nil
 }
 
-// ParseBlindBoxNft is a log parse operation binding the contract event 0xf3795295e85ef0eaa757ef4dfc633bcb74d63f86587326941fa3fbd305c520b6.
+// ParseBuyBlindBox is a log parse operation binding the contract event 0x996fb5df80ed4cb9750c208a37f2da0935db8267fdf2dbd81e2fba06e57a55d9.
 //
-// Solidity: event BlindBoxNft(address indexed member, address token, uint256 amount)
-func (_Buy *BuyFilterer) ParseBlindBoxNft(log types.Log) (*BuyBlindBoxNft, error) {
-	event := new(BuyBlindBoxNft)
-	if err := _Buy.contract.UnpackLog(event, "BlindBoxNft", log); err != nil {
+// Solidity: event BuyBlindBox(address indexed member, uint256 amount)
+func (_Buy *BuyFilterer) ParseBuyBlindBox(log types.Log) (*BuyBuyBlindBox, error) {
+	event := new(BuyBuyBlindBox)
+	if err := _Buy.contract.UnpackLog(event, "BuyBlindBox", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -1369,139 +1452,6 @@ func (_Buy *BuyFilterer) ParseBuyNft(log types.Log) (*BuyBuyNft, error) {
 	return event, nil
 }
 
-// BuyEIP712DomainChangedIterator is returned from FilterEIP712DomainChanged and is used to iterate over the raw logs and unpacked data for EIP712DomainChanged events raised by the Buy contract.
-type BuyEIP712DomainChangedIterator struct {
-	Event *BuyEIP712DomainChanged // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BuyEIP712DomainChangedIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BuyEIP712DomainChanged)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BuyEIP712DomainChanged)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BuyEIP712DomainChangedIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BuyEIP712DomainChangedIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BuyEIP712DomainChanged represents a EIP712DomainChanged event raised by the Buy contract.
-type BuyEIP712DomainChanged struct {
-	Raw types.Log // Blockchain specific contextual infos
-}
-
-// FilterEIP712DomainChanged is a free log retrieval operation binding the contract event 0x0a6387c9ea3628b88a633bb4f3b151770f70085117a15f9bf3787cda53f13d31.
-//
-// Solidity: event EIP712DomainChanged()
-func (_Buy *BuyFilterer) FilterEIP712DomainChanged(opts *bind.FilterOpts) (*BuyEIP712DomainChangedIterator, error) {
-
-	logs, sub, err := _Buy.contract.FilterLogs(opts, "EIP712DomainChanged")
-	if err != nil {
-		return nil, err
-	}
-	return &BuyEIP712DomainChangedIterator{contract: _Buy.contract, event: "EIP712DomainChanged", logs: logs, sub: sub}, nil
-}
-
-// WatchEIP712DomainChanged is a free log subscription operation binding the contract event 0x0a6387c9ea3628b88a633bb4f3b151770f70085117a15f9bf3787cda53f13d31.
-//
-// Solidity: event EIP712DomainChanged()
-func (_Buy *BuyFilterer) WatchEIP712DomainChanged(opts *bind.WatchOpts, sink chan<- *BuyEIP712DomainChanged) (event.Subscription, error) {
-
-	logs, sub, err := _Buy.contract.WatchLogs(opts, "EIP712DomainChanged")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BuyEIP712DomainChanged)
-				if err := _Buy.contract.UnpackLog(event, "EIP712DomainChanged", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseEIP712DomainChanged is a log parse operation binding the contract event 0x0a6387c9ea3628b88a633bb4f3b151770f70085117a15f9bf3787cda53f13d31.
-//
-// Solidity: event EIP712DomainChanged()
-func (_Buy *BuyFilterer) ParseEIP712DomainChanged(log types.Log) (*BuyEIP712DomainChanged, error) {
-	event := new(BuyEIP712DomainChanged)
-	if err := _Buy.contract.UnpackLog(event, "EIP712DomainChanged", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
 // BuyInitializedIterator is returned from FilterInitialized and is used to iterate over the raw logs and unpacked data for Initialized events raised by the Buy contract.
 type BuyInitializedIterator struct {
 	Event *BuyInitialized // Event containing the contract specifics and raw log
@@ -1630,6 +1580,152 @@ func (_Buy *BuyFilterer) WatchInitialized(opts *bind.WatchOpts, sink chan<- *Buy
 func (_Buy *BuyFilterer) ParseInitialized(log types.Log) (*BuyInitialized, error) {
 	event := new(BuyInitialized)
 	if err := _Buy.contract.UnpackLog(event, "Initialized", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// BuyOpenBlindBoxIterator is returned from FilterOpenBlindBox and is used to iterate over the raw logs and unpacked data for OpenBlindBox events raised by the Buy contract.
+type BuyOpenBlindBoxIterator struct {
+	Event *BuyOpenBlindBox // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BuyOpenBlindBoxIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BuyOpenBlindBox)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BuyOpenBlindBox)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BuyOpenBlindBoxIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BuyOpenBlindBoxIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BuyOpenBlindBox represents a OpenBlindBox event raised by the Buy contract.
+type BuyOpenBlindBox struct {
+	Member common.Address
+	Token  common.Address
+	Amount *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterOpenBlindBox is a free log retrieval operation binding the contract event 0xe71889d549f147c5826377e104cbc41f8344c596fa65b8af5de4320911a161e2.
+//
+// Solidity: event OpenBlindBox(address indexed member, address token, uint256 amount)
+func (_Buy *BuyFilterer) FilterOpenBlindBox(opts *bind.FilterOpts, member []common.Address) (*BuyOpenBlindBoxIterator, error) {
+
+	var memberRule []interface{}
+	for _, memberItem := range member {
+		memberRule = append(memberRule, memberItem)
+	}
+
+	logs, sub, err := _Buy.contract.FilterLogs(opts, "OpenBlindBox", memberRule)
+	if err != nil {
+		return nil, err
+	}
+	return &BuyOpenBlindBoxIterator{contract: _Buy.contract, event: "OpenBlindBox", logs: logs, sub: sub}, nil
+}
+
+// WatchOpenBlindBox is a free log subscription operation binding the contract event 0xe71889d549f147c5826377e104cbc41f8344c596fa65b8af5de4320911a161e2.
+//
+// Solidity: event OpenBlindBox(address indexed member, address token, uint256 amount)
+func (_Buy *BuyFilterer) WatchOpenBlindBox(opts *bind.WatchOpts, sink chan<- *BuyOpenBlindBox, member []common.Address) (event.Subscription, error) {
+
+	var memberRule []interface{}
+	for _, memberItem := range member {
+		memberRule = append(memberRule, memberItem)
+	}
+
+	logs, sub, err := _Buy.contract.WatchLogs(opts, "OpenBlindBox", memberRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BuyOpenBlindBox)
+				if err := _Buy.contract.UnpackLog(event, "OpenBlindBox", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseOpenBlindBox is a log parse operation binding the contract event 0xe71889d549f147c5826377e104cbc41f8344c596fa65b8af5de4320911a161e2.
+//
+// Solidity: event OpenBlindBox(address indexed member, address token, uint256 amount)
+func (_Buy *BuyFilterer) ParseOpenBlindBox(log types.Log) (*BuyOpenBlindBox, error) {
+	event := new(BuyOpenBlindBox)
+	if err := _Buy.contract.UnpackLog(event, "OpenBlindBox", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -2116,6 +2212,160 @@ func (_Buy *BuyFilterer) WatchRoleRevoked(opts *bind.WatchOpts, sink chan<- *Buy
 func (_Buy *BuyFilterer) ParseRoleRevoked(log types.Log) (*BuyRoleRevoked, error) {
 	event := new(BuyRoleRevoked)
 	if err := _Buy.contract.UnpackLog(event, "RoleRevoked", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// BuyTransferBlindBoxIterator is returned from FilterTransferBlindBox and is used to iterate over the raw logs and unpacked data for TransferBlindBox events raised by the Buy contract.
+type BuyTransferBlindBoxIterator struct {
+	Event *BuyTransferBlindBox // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BuyTransferBlindBoxIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BuyTransferBlindBox)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BuyTransferBlindBox)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BuyTransferBlindBoxIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BuyTransferBlindBoxIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BuyTransferBlindBox represents a TransferBlindBox event raised by the Buy contract.
+type BuyTransferBlindBox struct {
+	From   common.Address
+	To     common.Address
+	Amount *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterTransferBlindBox is a free log retrieval operation binding the contract event 0xb2c52e347b57f86e9af8a6df6d503f9bf32b25cc357cb421054c43dc041fe2ed.
+//
+// Solidity: event TransferBlindBox(address indexed from, address indexed to, uint256 amount)
+func (_Buy *BuyFilterer) FilterTransferBlindBox(opts *bind.FilterOpts, from []common.Address, to []common.Address) (*BuyTransferBlindBoxIterator, error) {
+
+	var fromRule []interface{}
+	for _, fromItem := range from {
+		fromRule = append(fromRule, fromItem)
+	}
+	var toRule []interface{}
+	for _, toItem := range to {
+		toRule = append(toRule, toItem)
+	}
+
+	logs, sub, err := _Buy.contract.FilterLogs(opts, "TransferBlindBox", fromRule, toRule)
+	if err != nil {
+		return nil, err
+	}
+	return &BuyTransferBlindBoxIterator{contract: _Buy.contract, event: "TransferBlindBox", logs: logs, sub: sub}, nil
+}
+
+// WatchTransferBlindBox is a free log subscription operation binding the contract event 0xb2c52e347b57f86e9af8a6df6d503f9bf32b25cc357cb421054c43dc041fe2ed.
+//
+// Solidity: event TransferBlindBox(address indexed from, address indexed to, uint256 amount)
+func (_Buy *BuyFilterer) WatchTransferBlindBox(opts *bind.WatchOpts, sink chan<- *BuyTransferBlindBox, from []common.Address, to []common.Address) (event.Subscription, error) {
+
+	var fromRule []interface{}
+	for _, fromItem := range from {
+		fromRule = append(fromRule, fromItem)
+	}
+	var toRule []interface{}
+	for _, toItem := range to {
+		toRule = append(toRule, toItem)
+	}
+
+	logs, sub, err := _Buy.contract.WatchLogs(opts, "TransferBlindBox", fromRule, toRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BuyTransferBlindBox)
+				if err := _Buy.contract.UnpackLog(event, "TransferBlindBox", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseTransferBlindBox is a log parse operation binding the contract event 0xb2c52e347b57f86e9af8a6df6d503f9bf32b25cc357cb421054c43dc041fe2ed.
+//
+// Solidity: event TransferBlindBox(address indexed from, address indexed to, uint256 amount)
+func (_Buy *BuyFilterer) ParseTransferBlindBox(log types.Log) (*BuyTransferBlindBox, error) {
+	event := new(BuyTransferBlindBox)
+	if err := _Buy.contract.UnpackLog(event, "TransferBlindBox", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

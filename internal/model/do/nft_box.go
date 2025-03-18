@@ -16,6 +16,7 @@ type NftBox struct {
 	Account         interface{} // 账户
 	ContractAddress interface{} // NFT合约地址
 	TokenId         interface{} // NFT tokenId
+	Amount          interface{} // 数量
 	TxHash          interface{} // 交易hash
 	TxTime          *gtime.Time // 开盲盒时间
 	TxEventId       interface{} // 交易事件id

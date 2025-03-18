@@ -14,6 +14,7 @@ type NftBox struct {
 	Account         string      `json:"account"         orm:"account"          ` // 账户
 	ContractAddress string      `json:"contractAddress" orm:"contract_address" ` // NFT合约地址
 	TokenId         uint        `json:"tokenId"         orm:"token_id"         ` // NFT tokenId
+	Amount          int64       `json:"amount"          orm:"amount"           ` // 数量
 	TxHash          string      `json:"txHash"          orm:"tx_hash"          ` // 交易hash
 	TxTime          *gtime.Time `json:"txTime"          orm:"tx_time"          ` // 开盲盒时间
 	TxEventId       uint        `json:"txEventId"       orm:"tx_event_id"      ` // 交易事件id

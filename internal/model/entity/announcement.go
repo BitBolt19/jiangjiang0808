@@ -7,7 +7,7 @@ package entity
 // Announcement is the golang structure for table announcement.
 type Announcement struct {
 	Id        uint   `json:"id"        orm:"id"         ` //
-	Type      int    `json:"type"      orm:"type"       ` // announcement类型: 1:公告 2:帮助中心 3.首页弹出 4.banner
+	Type      int    `json:"type"      orm:"type"       ` // 类型: 1:公告 2:帮助中心 3.首页弹出 4.新闻资讯
 	Language  string `json:"language"  orm:"language"   ` // 语言类型
 	Title     string `json:"title"     orm:"title"      ` // 标题
 	Link      string `json:"link"      orm:"link"       ` // 链接地址

@@ -17,6 +17,7 @@ type NftTransfer struct {
 	ContractAddress interface{} // NFT合约地址
 	FromAddress     interface{} // 发送方
 	ToAddress       interface{} // 接收方
+	Amount          interface{} // 数量
 	TokenId         interface{} // NFT tokenId
 	TxHash          interface{} // 交易hash
 	TxEventId       interface{} // 交替事件id
