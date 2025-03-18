@@ -19,7 +19,7 @@ type (
 	INFTbox interface {
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
-		// 当盲盒打开后，购买参数要更改为已开启
+		// 当盲盒打开后，购买 状态 要更改为已开启
 		UpdateStatus(ctx context.Context, event *buy.BuyOpenBlindBox, eventId uint) (err error)
 	}
 	INFTBuy interface {

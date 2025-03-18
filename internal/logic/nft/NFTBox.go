@@ -111,6 +111,7 @@ func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyOpenBlindBox, log *s
 			g.Log().Error(ctx, err)
 			return err
 		}
+
 		newBox.Id = uint(insertId)
 		// 调用更新状态
 		err = s.UpdateStatus(ctx, event, eventId)
@@ -121,7 +122,7 @@ func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyOpenBlindBox, log *s
 	return nil
 }
 
-// 当盲盒打开后，购买参数要更改为已开启
+// 当盲盒打开后，购买 状态 要更改为已开启
 func (s *sNFTbox) UpdateStatus(ctx context.Context, event *buy.BuyOpenBlindBox, eventId uint) (err error) {
 	_, err = dao.NftBuy.Ctx(ctx).
 		Where("account = ?", event.Member.Hex()).
