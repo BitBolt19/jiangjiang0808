@@ -8,7 +8,6 @@ package service
 import (
 	"context"
 	"nez-server/internal/logic/contract/buy"
-	"nez-server/internal/model/entity"
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -27,7 +26,7 @@ type (
 		ConsumeEvents(ctx context.Context) error
 	}
 	INFTHold interface {
-		NewTransfer(ctx context.Context, contract string, to string, tokenId uint64, holdTime time.Time) error
+		NewHold(ctx context.Context, contract string, to string, tokenId uint64, holdTime time.Time) error
 		GetAccountNFTHoldNum(ctx context.Context, account string) (holdNum int, err error)
 	}
 	INFTStaking interface {
@@ -38,8 +37,7 @@ type (
 	INFT interface {
 		// ConsumeEvents 消费链上事件
 		ConsumeEvents(ctx context.Context) error
-		NewNFTTransfer(ctx context.Context, contract common.Address, transfer *buy.BuyTransferBlindBox, log *scanner.Elog) error
-		GetLastTransfer(ctx context.Context, contractAddress string, to string, tokenId uint64) (*entity.NftTransfer, error)
+		NewTransfer(ctx context.Context, contract common.Address, from common.Address, to common.Address, amount int64, log *scanner.Elog) error
 	}
 )
 

@@ -111,7 +111,6 @@ func (s *sNFTbox) newBox(ctx context.Context, event *buy.BuyOpenBlindBox, log *s
 			g.Log().Error(ctx, err)
 			return err
 		}
-
 		newBox.Id = uint(insertId)
 		// 调用更新状态
 		err = s.UpdateStatus(ctx, event, eventId)

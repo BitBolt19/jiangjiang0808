@@ -22,7 +22,7 @@ func NewNFTHold() service.INFTHold {
 	return &sNFTHold{}
 }
 
-func (s *sNFTHold) NewTransfer(ctx context.Context, contract string, to string, tokenId uint64, holdTime time.Time) error {
+func (s *sNFTHold) NewHold(ctx context.Context, contract string, to string, tokenId uint64, holdTime time.Time) error {
 	rec, err := dao.NftHold.Ctx(ctx).One("contract_address = ? AND tx_event_id = ?", contract, tokenId)
 	if err != nil {
 		g.Log().Error(ctx, err)

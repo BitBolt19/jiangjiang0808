@@ -88,7 +88,7 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyBlindBox, contrac
 		return err
 	}
 	if rec.IsEmpty() {
-		time, err := global.GetEventLogTime(ctx, log.Log)
+		timestamp, err := global.GetEventLogTime(ctx, log.Log)
 		if err != nil {
 			g.Log().Error(ctx, err)
 			return err
@@ -98,7 +98,7 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyBlindBox, contrac
 			ContractAddress: contractAddress.Hex(),
 			Amount:          event.Amount.Int64(),
 			TxHash:          hash,
-			TxTime:          gtime.NewFromTimeStamp(int64(time)),
+			TxTime:          gtime.NewFromTimeStamp(int64(timestamp)),
 			TxEventId:       eventId,
 			Status:          consts.NFT_Buy_Box_Status,
 		}
@@ -108,9 +108,18 @@ func (s *sNFTBuy) newBuy(ctx context.Context, event *buy.BuyBuyBlindBox, contrac
 			return err
 		}
 		newBuy.Id = uint(insertId)
+		fromAddress := "0x0000000000000000000000000000000000000000"
+		from := common.HexToAddress(fromAddress)
 		//第一版先不自动结算
 		//return service.NFTBuyReward().HandleNewBuy(ctx, newBuy)
-		//service.NFTHold().NewTransfer(ctx, event.Token.Hex(), event.Member.Hex(), 0, times.Unix(int64(time), 0))
+		//err = service.NFTHold().NewHold(ctx, contractAddress.Hex(), event.Member.Hex(), 0, time.Unix(int64(timestamp), 0))
+		//if err != nil {
+		//	return err
+		//}
+		err = service.NFT().NewTransfer(ctx, contractAddress, from, event.Member, 1, log)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }

@@ -76,13 +76,13 @@ func (s *sNFT) handleEventLog(ctx context.Context, contractAddress common.Addres
 	//	return errors.New("parse event failed")
 	//}
 	if event != nil {
-		return s.NewNFTTransfer(ctx, s.ContractAddress, event, log)
+		return s.NewTransfer(ctx, s.ContractAddress, event.From, event.To, event.Amount.Int64(), log)
 	}
 	//g.Log().Infof(ctx, "Handle nft transfer", From, event.Member.Hex())
 	return nil
 }
 
-func (s *sNFT) NewNFTTransfer(ctx context.Context, contract common.Address, transfer *buy.BuyTransferBlindBox, log *scanner.Elog) error {
+func (s *sNFT) NewTransfer(ctx context.Context, contract common.Address, from common.Address, to common.Address, amount int64, log *scanner.Elog) error {
 	hash := log.TxHash.Hex()
 	rec, err := dao.NftTransfer.Ctx(ctx).One("tx_hash = ? AND tx_event_id = ? ", hash, log.Index)
 	if err != nil {
@@ -99,11 +99,11 @@ func (s *sNFT) NewNFTTransfer(ctx context.Context, contract common.Address, tran
 		return err
 	}
 	res, err := dao.NftTransfer.Ctx(ctx).Insert(&entity.NftTransfer{
-		Account:         transfer.To.Hex(),
+		Account:         to.Hex(),
 		ContractAddress: contract.Hex(),
-		FromAddress:     transfer.From.Hex(),
-		ToAddress:       transfer.To.Hex(),
-		Amount:          transfer.Amount.Int64(),
+		FromAddress:     from.Hex(),
+		ToAddress:       to.Hex(),
+		Amount:          amount,
 		TxHash:          hash,
 		TxEventId:       log.Index,
 		TxTime:          gtime.NewFromTimeStamp(int64(eventLogTime)),
@@ -121,25 +121,5 @@ func (s *sNFT) NewNFTTransfer(ctx context.Context, contract common.Address, tran
 		err = errors.New("insert rows err")
 		g.Log().Error(ctx, err, rows)
 	}
-	return service.NFTHold().NewTransfer(ctx, contract.Hex(), transfer.To.Hex(), uint64(log.Index), time.Unix(int64(eventLogTime), 0))
-}
-
-func (s *sNFT) GetLastTransfer(ctx context.Context, contractAddress string, to string, tokenId uint64) (*entity.NftTransfer, error) {
-	lastCreatedTime, err := dao.NftTransfer.Ctx(ctx).Where("contract_address = ? AND to_address = ? AND token_id = ?", contractAddress, to, tokenId).Max("created_at")
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	rec, err := dao.NftTransfer.Ctx(ctx).One("created_at", lastCreatedTime)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	var NFTTransfer entity.NftTransfer
-	err = rec.Struct(&NFTTransfer)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return nil, err
-	}
-	return &NFTTransfer, nil
+	return service.NFTHold().NewHold(ctx, contract.Hex(), to.Hex(), uint64(log.Index), time.Unix(int64(eventLogTime), 0))
 }
