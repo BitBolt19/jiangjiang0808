@@ -24,7 +24,11 @@ func NewAnnouncement() service.IAnnouncement {
 // 获取 对应的公告内容  列表
 func (s *sAnnouncement) GetAnnouncement(ctx context.Context, req *v1.GetNewsReq) (res *v1.GetNewsRes, total int, err error) {
 	typeId := req.Type
-	result, total, err := dao.Announcement.Ctx(ctx).Fields("id,type,language,title,link,article,index_img,start_time,end_time,status,created_at,updated_at").Where("type = ?", typeId).Where("status = 0").Page(req.Page, req.Size).AllAndCount(false)
+	language := req.Language
+	if language == "" {
+		language = "zh"
+	}
+	result, total, err := dao.Announcement.Ctx(ctx).Fields("id,type,language,title,link,article,index_img,start_time,end_time,status,created_at,updated_at").Where("type = ?", typeId).Where("language = ?", language).Where("status = 0").Page(req.Page, req.Size).AllAndCount(false)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return nil, total, err
