@@ -28,7 +28,7 @@ func (s *sAnnouncement) GetAnnouncement(ctx context.Context, req *v1.GetNewsReq)
 	if language == "" {
 		language = "cn"
 	}
-	result, total, err := dao.Announcement.Ctx(ctx).Fields("id,type,language,title,link,article,index_img,start_time,end_time,status,created_at,updated_at").Where("type = ?", typeId).Where("language = ?", language).Where("status = 0").Page(req.Page, req.Size).AllAndCount(false)
+	result, total, err := dao.Announcement.Ctx(ctx).Fields("id,type,language,title,link,article,index_img,start_time,end_time,status,created_at,updated_at").Where("type = ?", typeId).Where("language = ?", language).Where("status = 0").OrderDesc("created_at").Page(req.Page, req.Size).AllAndCount(false)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return nil, total, err
