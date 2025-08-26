@@ -10,6 +10,7 @@ var (
 	ScannerName      string
 	RpcUri           string
 	Box              common.Address
+	D3xAt            common.Address
 	Lottery          common.Address
 	Staking          common.Address
 	NFTBuyRewards    []*NFTBuyReward
@@ -53,6 +54,11 @@ func init() {
 		panic(err)
 	} else {
 		Staking = common.HexToAddress(gVer.String())
+	}
+	if gVer, err := g.Cfg().Get(ctx, "contract.address.D3xAT"); err != nil {
+		panic(err)
+	} else {
+		D3xAt = common.HexToAddress(gVer.String())
 	}
 
 	if gVer, err := g.Cfg().Get(ctx, "NFTBuyRewards"); err != nil {
